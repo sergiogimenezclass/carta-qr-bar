@@ -1,4 +1,6 @@
 const productList = document.querySelector("#product-list");
+const categoryButtons = document.querySelectorAll(".category-button");
+let selectedCategory = "Todo";
 
 function formatPrice(price) {
   return `$${price.toLocaleString("es-AR")}`;
@@ -48,5 +50,27 @@ function createProductCard(product) {
 function renderProducts(productListToRender) {
   productList.innerHTML = productListToRender.map(createProductCard).join("");
 }
+
+function filterByCategory(category) {
+  selectedCategory = category;
+
+  categoryButtons.forEach((button) => {
+    const isSelected = button.dataset.category === selectedCategory;
+    button.classList.toggle("is-active", isSelected);
+  });
+
+  const filteredProducts =
+    selectedCategory === "Todo"
+      ? productos
+      : productos.filter((product) => product.categoria === selectedCategory);
+
+  renderProducts(filteredProducts);
+}
+
+categoryButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    filterByCategory(button.dataset.category);
+  });
+});
 
 renderProducts(productos);
