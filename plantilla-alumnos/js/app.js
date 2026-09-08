@@ -1,6 +1,8 @@
 const productList = document.querySelector("#product-list");
 const categoryButtons = document.querySelectorAll(".category-button");
+const searchInput = document.querySelector("#search");
 let selectedCategory = "Todo";
+let searchTerm = "";
 
 function formatPrice(price) {
   return `$${price.toLocaleString("es-AR")}`;
@@ -48,29 +50,47 @@ function createProductCard(product) {
 }
 
 function renderProducts(productListToRender) {
+  if (productListToRender.length === 0) {
+    productList.innerHTML = `
+      <div class="empty-state">
+        <strong>No encontramos productos</strong>
+        <p>Probá con otra palabra o elegí una categoría diferente.</p>
+      </div>
+    `;
+    return;
+  }
+
   productList.innerHTML = productListToRender.map(createProductCard).join("");
 }
 
-function filterByCategory(category) {
-  selectedCategory = category;
+function applyFilters() {
+  const normalizedSearch = searchTerm.toLocaleLowerCase("es");
+  const filteredProducts = productos.filter((product) => {
+    const matchesCategory =
+      selectedCategory === "Todo" || product.categoria === selectedCategory;
+    const matchesSearch = product.nombre
+      .toLocaleLowerCase("es")
+      .includes(normalizedSearch);
 
-  categoryButtons.forEach((button) => {
-    const isSelected = button.dataset.category === selectedCategory;
-    button.classList.toggle("is-active", isSelected);
+    return matchesCategory && matchesSearch;
   });
-
-  const filteredProducts =
-    selectedCategory === "Todo"
-      ? productos
-      : productos.filter((product) => product.categoria === selectedCategory);
-
   renderProducts(filteredProducts);
 }
 
 categoryButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    filterByCategory(button.dataset.category);
+    selectedCategory = button.dataset.category;
+    categoryButtons.forEach((categoryButton) => {
+      const isSelected = categoryButton.dataset.category === selectedCategory;
+      categoryButton.classList.toggle("is-active", isSelected);
+    });
+    applyFilters();
   });
+});
+
+searchInput.addEventListener("input", () => {
+  searchTerm = searchInput.value.trim();
+  applyFilters();
 });
 
 renderProducts(productos);
