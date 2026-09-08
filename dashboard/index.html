@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Panel docente para administrar las cartas digitales del curso."
+    />
+    <title>Cartas del curso | Panel docente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Ir al inicio">
+        <span class="brand__mark" aria-hidden="true">27</span>
+        <span>
+          <strong>Cartas del curso</strong>
+          <small>CFP 27 · Diseño Web</small>
+        </span>
+      </a>
+
+      <div class="teacher">
+        <span class="teacher__avatar" aria-hidden="true">SG</span>
+        <span class="teacher__text">
+          <small>Panel docente</small>
+          <strong>Sergio</strong>
+        </span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="page-heading" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Ciclo lectivo 2026</p>
+          <h1 id="page-title">Cartas digitales</h1>
+          <p class="page-heading__intro">
+            Consultá los comercios asignados y accedé a cada proyecto publicado.
+          </p>
+        </div>
+
+        <div class="summary" aria-label="Resumen del curso">
+          <div>
+            <strong>10</strong>
+            <span>comercios</span>
+          </div>
+          <div>
+            <strong>0</strong>
+            <span>publicados</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Consulta de comercios">
+        <div class="selector-panel">
+          <label for="comercio">Elegí un comercio</label>
+          <div class="select-wrap">
+            <select id="comercio" name="comercio">
+              <option value="cafe-nomade">Café Nómade</option>
+              <option value="bruma-cafe">Bruma Café</option>
+              <option value="patio-central">Patio Central</option>
+              <option value="esquina-verde">La Esquina Verde</option>
+              <option value="tostado-club">Tostado Club</option>
+              <option value="bodega-urbana">Bodega Urbana</option>
+              <option value="miga-miel">Miga y Miel</option>
+              <option value="fuego-lento">Fuego Lento</option>
+              <option value="estacion-cafe">Estación Café</option>
+              <option value="terraza-sur">Terraza Sur</option>
+            </select>
+          </div>
+          <p class="field-help">La información se actualizará al cambiar la selección.</p>
+
+          <div class="commerce-list" aria-labelledby="commerce-list-title">
+            <div class="section-label">
+              <h2 id="commerce-list-title">Comercios del curso</h2>
+              <span>10 lugares</span>
+            </div>
+
+            <ol>
+              <li class="is-active"><span>01</span>Café Nómade</li>
+              <li><span>02</span>Bruma Café</li>
+              <li><span>03</span>Patio Central</li>
+              <li><span>04</span>La Esquina Verde</li>
+              <li><span>05</span>Tostado Club</li>
+              <li><span>06</span>Bodega Urbana</li>
+              <li><span>07</span>Miga y Miel</li>
+              <li><span>08</span>Fuego Lento</li>
+              <li><span>09</span>Estación Café</li>
+              <li><span>10</span>Terraza Sur</li>
+            </ol>
+          </div>
+        </div>
+
+        <article class="commerce-card">
+          <div class="commerce-card__header">
+            <div>
+              <span class="status"><i aria-hidden="true"></i> En construcción</span>
+              <h2>Café Nómade</h2>
+              <p>Cafetería</p>
+            </div>
+            <span class="commerce-number" aria-label="Comercio número 1">01</span>
+          </div>
+
+          <div class="commerce-card__body">
+            <div class="site-data">
+              <div class="data-block">
+                <span>Nombre exacto en Netlify</span>
+                <code>cafe-nomade-cfp27-2026-01</code>
+              </div>
+
+              <div class="data-block">
+                <span>Dirección pública asignada</span>
+                <a href="https://cafe-nomade-cfp27-2026-01.netlify.app">
+                  cafe-nomade-cfp27-2026-01.netlify.app
+                </a>
+              </div>
+
+              <div class="actions" aria-label="Acciones del comercio">
+                <button class="button button--primary" type="button" disabled>
+                  Abrir carta
+                </button>
+                <button class="button button--secondary" type="button" disabled>
+                  Copiar URL
+                </button>
+              </div>
+            </div>
+
+            <div class="qr-panel">
+              <div class="qr-placeholder" aria-label="Espacio reservado para el código QR">
+                <span>QR</span>
+              </div>
+              <strong>Escaneá para abrir la carta</strong>
+              <p>El código estará disponible en la próxima etapa.</p>
+            </div>
+          </div>
+
+          <footer class="commerce-card__footer">
+            <span>El sitio todavía no fue publicado.</span>
+            <span>Última revisión: pendiente</span>
+          </footer>
+        </article>
+      </section>
+    </main>
+
+    <script src="js/comercios.js"></script>
+  </body>
+</html>
