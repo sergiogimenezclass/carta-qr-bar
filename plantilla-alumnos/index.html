@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Carta digital de Café Nómade: cafés, desayunos, platos y pastelería."
+    />
+    <title>Café Nómade | Carta digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Café Nómade, ir al inicio">
+        <span class="brand-mark" aria-hidden="true">CN</span>
+        <span class="brand-name">Café Nómade</span>
+      </a>
+
+      <button class="table-button" type="button">
+        <span>Mesa</span>
+        <strong>08</strong>
+      </button>
+    </header>
+
+    <main id="inicio" class="page-grid">
+      <section class="welcome-panel" aria-labelledby="welcome-title">
+        <div class="welcome-copy">
+          <p class="eyebrow">Buenos Aires · Desde 2019</p>
+          <h1 id="welcome-title">Una pausa rica, estés donde estés.</h1>
+          <p>
+            Café de especialidad, cocina simple y productos de estación preparados
+            en el momento.
+          </p>
+        </div>
+
+        <div class="service-note">
+          <span class="service-dot" aria-hidden="true"></span>
+          <span>Cocina abierta hasta las 21:30</span>
+        </div>
+      </section>
+
+      <section class="menu-section" aria-labelledby="menu-title">
+        <div class="menu-heading">
+          <div>
+            <p class="eyebrow">Nuestra selección</p>
+            <h2 id="menu-title">¿Qué vas a pedir?</h2>
+          </div>
+
+          <label class="search-box" for="search">
+            <span aria-hidden="true">⌕</span>
+            <input
+              id="search"
+              type="search"
+              placeholder="Buscar en la carta"
+              autocomplete="off"
+            />
+          </label>
+        </div>
+
+        <nav class="category-list" aria-label="Categorías de la carta">
+          <button class="category-button is-active" type="button">Todo</button>
+          <button class="category-button" type="button">Cafés</button>
+          <button class="category-button" type="button">Bebidas frías</button>
+          <button class="category-button" type="button">Desayunos</button>
+          <button class="category-button" type="button">Platos</button>
+          <button class="category-button" type="button">Dulces</button>
+        </nav>
+
+        <div class="product-grid" id="product-list">
+          <article class="product-card">
+            <div class="product-image product-image-coffee" role="img" aria-label="Latte Nómade">
+              <span class="product-tag">Más pedido</span>
+              <button class="favorite-button" type="button" aria-label="Agregar Latte Nómade a favoritos">♡</button>
+            </div>
+            <div class="product-content">
+              <div class="product-title-row">
+                <h3>Latte Nómade</h3>
+                <strong>$4.800</strong>
+              </div>
+              <p>Espresso doble, leche texturizada y un toque de miel.</p>
+              <div class="product-footer">
+                <span>Vegetariano</span>
+                <button type="button">Agregar <b>+</b></button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image product-image-brunch" role="img" aria-label="Tostón del patio">
+              <button class="favorite-button" type="button" aria-label="Agregar Tostón del patio a favoritos">♡</button>
+            </div>
+            <div class="product-content">
+              <div class="product-title-row">
+                <h3>Tostón del patio</h3>
+                <strong>$8.900</strong>
+              </div>
+              <p>Pan de masa madre, palta, huevo poché y hojas frescas.</p>
+              <div class="product-footer">
+                <span>Sin lactosa</span>
+                <button type="button">Agregar <b>+</b></button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image product-image-cake" role="img" aria-label="Torta húmeda de chocolate">
+              <span class="product-tag">Nuevo</span>
+              <button class="favorite-button" type="button" aria-label="Agregar Torta húmeda a favoritos">♡</button>
+            </div>
+            <div class="product-content">
+              <div class="product-title-row">
+                <h3>Torta húmeda</h3>
+                <strong>$6.200</strong>
+              </div>
+              <p>Chocolate semiamargo, ganache y sal marina.</p>
+              <div class="product-footer">
+                <span>Vegetariano</span>
+                <button type="button">Agregar <b>+</b></button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <aside class="order-bar" aria-label="Resumen del pedido">
+      <div class="order-copy">
+        <span class="order-count">0</span>
+        <span>
+          <small>Tu pedido</small>
+          <strong>Todavía está vacío</strong>
+        </span>
+      </div>
+      <button type="button" disabled>Ver pedido</button>
+    </aside>
+  </body>
+</html>
