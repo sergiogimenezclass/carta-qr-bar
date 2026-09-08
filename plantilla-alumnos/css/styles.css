@@ -108,7 +108,7 @@ a {
   color: #ffffff;
   background:
     linear-gradient(180deg, rgba(20, 19, 16, 0.18), rgba(20, 19, 16, 0.88)),
-    url("../assets/images/cafe-hero.jpg") center 48% / cover no-repeat,
+    url("../assets/images/latte.png") center 48% / cover no-repeat,
     #264f3b;
 }
 
@@ -285,21 +285,6 @@ h1 {
   height: 220px;
   background-position: center;
   background-size: cover;
-}
-
-.product-image-coffee {
-  background-image: url("../assets/images/latte.jpg");
-  background-color: #6f5948;
-}
-
-.product-image-brunch {
-  background-image: url("../assets/images/toston.jpg");
-  background-color: #718255;
-}
-
-.product-image-cake {
-  background-image: url("../assets/images/torta.jpg");
-  background-color: #4a3028;
 }
 
 .product-tag {
