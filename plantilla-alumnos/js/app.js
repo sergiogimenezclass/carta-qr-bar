@@ -1,9 +1,13 @@
 const productList = document.querySelector("#product-list");
 const categoryButtons = document.querySelectorAll(".category-button");
 const searchInput = document.querySelector("#search");
+const orderCount = document.querySelector("#order-count");
+const orderSummary = document.querySelector("#order-summary");
+const viewOrderButton = document.querySelector("#view-order");
 let selectedCategory = "Todo";
 let searchTerm = "";
 const favoriteProductIds = new Set();
+const orderItems = new Map();
 
 function formatPrice(price) {
   return `$${price.toLocaleString("es-AR")}`;
@@ -45,7 +49,12 @@ function createProductCard(product) {
         <p>${product.descripcion}</p>
         <div class="product-footer">
           <span>${product.preferencia}</span>
-          <button type="button" ${buttonDisabled}>
+          <button
+            type="button"
+            data-action="add"
+            data-product-id="${product.id}"
+            ${buttonDisabled}
+          >
             ${buttonText}${product.disponible ? " <b>+</b>" : ""}
           </button>
         </div>
@@ -82,6 +91,24 @@ function applyFilters() {
   renderProducts(filteredProducts);
 }
 
+function updateOrderSummary() {
+  let itemCount = 0;
+  let subtotal = 0;
+
+  orderItems.forEach((quantity, productId) => {
+    const product = productos.find((item) => item.id === productId);
+    itemCount += quantity;
+    subtotal += product.precio * quantity;
+  });
+
+  orderCount.textContent = itemCount;
+  orderSummary.textContent =
+    itemCount === 0
+      ? "Todavía está vacío"
+      : `${itemCount} ${itemCount === 1 ? "producto" : "productos"} · ${formatPrice(subtotal)}`;
+  viewOrderButton.disabled = itemCount === 0;
+}
+
 categoryButtons.forEach((button) => {
   button.addEventListener("click", () => {
     selectedCategory = button.dataset.category;
@@ -100,16 +127,26 @@ searchInput.addEventListener("input", () => {
 
 productList.addEventListener("click", (event) => {
   const favoriteButton = event.target.closest('[data-action="favorite"]');
-  if (!favoriteButton) return;
+  if (favoriteButton) {
+    const productId = Number(favoriteButton.dataset.productId);
+    if (favoriteProductIds.has(productId)) {
+      favoriteProductIds.delete(productId);
+    } else {
+      favoriteProductIds.add(productId);
+    }
 
-  const productId = Number(favoriteButton.dataset.productId);
-  if (favoriteProductIds.has(productId)) {
-    favoriteProductIds.delete(productId);
-  } else {
-    favoriteProductIds.add(productId);
+    applyFilters();
+    return;
   }
 
-  applyFilters();
+  const addButton = event.target.closest('[data-action="add"]');
+  if (!addButton) return;
+
+  const productId = Number(addButton.dataset.productId);
+  const currentQuantity = orderItems.get(productId) || 0;
+  orderItems.set(productId, currentQuantity + 1);
+  updateOrderSummary();
 });
 
 renderProducts(productos);
+updateOrderSummary();

@@ -484,6 +484,12 @@ h1 {
   font-weight: 700;
 }
 
+.order-bar > button:not(:disabled) {
+  color: #211d19;
+  background: #f3bd82;
+  cursor: pointer;
+}
+
 @media (min-width: 720px) {
   .site-header {
     padding-right: 6%;
