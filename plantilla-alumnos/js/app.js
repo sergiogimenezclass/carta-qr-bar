@@ -3,6 +3,7 @@ const categoryButtons = document.querySelectorAll(".category-button");
 const searchInput = document.querySelector("#search");
 let selectedCategory = "Todo";
 let searchTerm = "";
+const favoriteProductIds = new Set();
 
 function formatPrice(price) {
   return `$${price.toLocaleString("es-AR")}`;
@@ -16,6 +17,7 @@ function createProductCard(product) {
   const availabilityClass = product.disponible ? "" : " is-sold-out";
   const buttonText = product.disponible ? "Agregar" : "Agotado";
   const buttonDisabled = product.disponible ? "" : "disabled";
+  const isFavorite = favoriteProductIds.has(product.id);
 
   return `
     <article class="product-card${availabilityClass}" data-product-id="${product.id}">
@@ -27,10 +29,13 @@ function createProductCard(product) {
       >
         ${tag}
         <button
-          class="favorite-button"
+          class="favorite-button${isFavorite ? " is-favorite" : ""}"
           type="button"
-          aria-label="Agregar ${product.nombre} a favoritos"
-        >♡</button>
+          data-action="favorite"
+          data-product-id="${product.id}"
+          aria-label="${isFavorite ? "Quitar" : "Agregar"} ${product.nombre} ${isFavorite ? "de" : "a"} favoritos"
+          aria-pressed="${isFavorite}"
+        >${isFavorite ? "♥" : "♡"}</button>
       </div>
       <div class="product-content">
         <div class="product-title-row">
@@ -90,6 +95,20 @@ categoryButtons.forEach((button) => {
 
 searchInput.addEventListener("input", () => {
   searchTerm = searchInput.value.trim();
+  applyFilters();
+});
+
+productList.addEventListener("click", (event) => {
+  const favoriteButton = event.target.closest('[data-action="favorite"]');
+  if (!favoriteButton) return;
+
+  const productId = Number(favoriteButton.dataset.productId);
+  if (favoriteProductIds.has(productId)) {
+    favoriteProductIds.delete(productId);
+  } else {
+    favoriteProductIds.add(productId);
+  }
+
   applyFilters();
 });
 

@@ -344,6 +344,11 @@ h1 {
   cursor: pointer;
 }
 
+.favorite-button.is-favorite {
+  color: #ffffff;
+  background: #bf4d4d;
+}
+
 .product-content {
   display: flex;
   flex: 1;
