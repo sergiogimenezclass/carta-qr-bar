@@ -427,15 +427,8 @@ select:focus {
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 12px;
-  width: 100%;
-}
-
-.actions .button {
-  flex: 1 1 45%;
-  min-width: 140px;
-  text-align: center;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .button {
@@ -443,7 +436,7 @@ select:focus {
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding: 12px 20px;
+  padding: 10px 20px;
   border: 1px solid transparent;
   border-radius: 12px;
   font-weight: 700;
@@ -672,10 +665,6 @@ select:focus {
   margin-top: 8px;
 }
 
-.modal-header--danger {
-  background-color: #D32F2F;
-}
-
 .modal-body-content {
   padding: 32px 32px 16px 32px;
 }
@@ -687,16 +676,9 @@ select:focus {
   line-height: 1.5;
 }
 
-.button--danger-solid {
-  border-color: #D32F2F;
-  color: #FFFFFF;
-  background-color: #FFFFFF;
-  color: #FFFFFF;
-  background-color: #D32F2F;
-}
-
-.button--danger-solid:hover {
-  background-color: #B71C1C;
+.modal-actions--confirm {
+  padding: 0px 32px 32px 32px;
+  margin-top: 0px;
 }
 
 /* ===========================================================================
