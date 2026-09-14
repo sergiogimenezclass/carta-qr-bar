@@ -103,12 +103,18 @@ h1, h2, h3, h4 {
 
 .table-info {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 10px;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 14px;
   background-color: rgba(255, 255, 255, 0.08);
+}
+
+.table-header-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .status-dot {
@@ -130,6 +136,38 @@ h1, h2, h3, h4 {
   font-size: 12px;
 }
 
+.icon-button {
+  margin-left: auto;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #FFFFFF;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.header-action-button {
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.header-action-button:hover {
+  background-color: #C86D51;
+  border-color: #C86D51;
+}
+
 /* CONTENEDOR PRINCIPAL */
 .page-shell {
   width: 100%;
@@ -140,7 +178,7 @@ h1, h2, h3, h4 {
 }
 
 /* ===========================================================================
-   2. CONTROLES: BUSCADOR Y FILTROS POR CATEGORÍA (GRID)
+   2. CONTROLES: BUSCADOR Y FILTROS POR CATEGORÍA Y PREFERENCIA (GRID)
    =========================================================================== */
 .menu-controls {
   display: grid;
@@ -167,7 +205,7 @@ h1, h2, h3, h4 {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 6px;
+  padding-bottom: 4px;
 }
 
 .category-button {
@@ -188,6 +226,41 @@ h1, h2, h3, h4 {
   color: #FFFFFF;
   background-color: #C86D51;
   border-color: #C86D51;
+}
+
+/* FILTROS MÚLTIPLES POR PREFERENCIA ALIMENTARIA */
+.preference-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.filter-label {
+  color: #7A6F68;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.preference-chip {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border: 1px solid #DDD0C2;
+  border-radius: 14px;
+  color: #7A6F68;
+  background-color: #EFE9DF;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.preference-chip.is-active,
+.preference-chip:hover {
+  color: #FFFFFF;
+  background-color: #1E1B18;
+  border-color: #1E1B18;
 }
 
 /* ===========================================================================
@@ -417,8 +490,28 @@ h1, h2, h3, h4 {
   opacity: 0.45;
 }
 
+/* TOAST DE NOTIFICACIÓN TEMPORAL (MOZO / CUENTA) */
+.toast-notice {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border: 1px solid #DDD0C2;
+  border-radius: 30px;
+  color: #FFFFFF;
+  background-color: #1E1B18;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 2000;
+}
+
 /* ===========================================================================
-   5. MODAL DE PEDIDO: FLEXBOX
+   5. MODALES DE DETALLE, PROPINAS E HISTORIAL: FLEXBOX
    =========================================================================== */
 .modal-overlay {
   position: fixed;
@@ -483,7 +576,7 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin: 0px 0px 20px 0px;
+  margin: 0px 0px 16px 0px;
   padding: 0px;
   list-style: none;
 }
@@ -520,6 +613,46 @@ h1, h2, h3, h4 {
   cursor: pointer;
 }
 
+/* SELECTOR DE PROPINAS */
+.tip-section {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid #DDD0C2;
+  border-radius: 14px;
+  background-color: #F5EFE6;
+}
+
+.tip-title {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tip-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.tip-button {
+  flex: 1;
+  min-height: 36px;
+  border: 1px solid #DDD0C2;
+  border-radius: 10px;
+  color: #1E1B18;
+  background-color: #FFFFFF;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tip-button.is-active,
+.tip-button:hover {
+  color: #FFFFFF;
+  background-color: #C86D51;
+  border-color: #C86D51;
+}
+
 .order-total-block {
   display: flex;
   align-items: center;
@@ -542,6 +675,38 @@ h1, h2, h3, h4 {
   gap: 10px;
   padding: 16px 24px;
   border-top: 1px solid #DDD0C2;
+}
+
+/* HISTORIAL DE MESAS */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-card {
+  padding: 14px 18px;
+  border: 1px solid #DDD0C2;
+  border-radius: 14px;
+  background-color: #F5EFE6;
+}
+
+.history-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #DDD0C2;
+}
+
+.history-card-header strong {
+  font-size: 14px;
+}
+
+.history-card-header small {
+  color: #7A6F68;
+  font-size: 12px;
 }
 
 /* MODAL DE ÉXITO DE PEDIDO */
@@ -599,6 +764,53 @@ h1, h2, h3, h4 {
   display: none !important;
 }
 
+/* ===========================================================================
+   6. TEMA OSCURO (MODO NOCHE - SIN VARIABLES CSS)
+   =========================================================================== */
+body.dark-theme {
+  color: #F5EFE6;
+  background-color: #181614;
+}
+
+body.dark-theme .menu-controls input,
+body.dark-theme .category-button,
+body.dark-theme .product-card,
+body.dark-theme .modal-card,
+body.dark-theme .empty-state,
+body.dark-theme .tip-button,
+body.dark-theme .button--secondary {
+  color: #F5EFE6;
+  background-color: #24201C;
+  border-color: #38322B;
+}
+
+body.dark-theme .preference-chip,
+body.dark-theme .order-item-row,
+body.dark-theme .order-total-block,
+body.dark-theme .tip-section,
+body.dark-theme .history-card {
+  color: #F5EFE6;
+  background-color: #2E2924;
+  border-color: #38322B;
+}
+
+body.dark-theme .product-content p,
+body.dark-theme .product-footer span,
+body.dark-theme .filter-label,
+body.dark-theme .empty-state p,
+body.dark-theme .modal-card--success p,
+body.dark-theme .history-card-header small {
+  color: #A59B93;
+}
+
+body.dark-theme .category-button.is-active,
+body.dark-theme .preference-chip.is-active,
+body.dark-theme .tip-button.is-active {
+  color: #FFFFFF;
+  background-color: #C86D51;
+  border-color: #C86D51;
+}
+
 /* RESPONSIVE EN PIXELES */
 @media (max-width: 600px) {
   .menu-hero__container {
@@ -608,5 +820,14 @@ h1, h2, h3, h4 {
   
   .table-info {
     width: 100%;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-action-button {
+    flex: 1;
+    text-align: center;
   }
 }

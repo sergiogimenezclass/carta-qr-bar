@@ -251,6 +251,51 @@ A continuación se presenta la secuencia guiada de **18 prompts** que los alumno
 
 ---
 
+### Paso 19: Filtros Múltiples por Preferencia Alimentaria
+* **Objetivo**: Filtrar productos combinando la categoría activa con la preferencia alimentaria (*Vegano*, *Vegetariano*, *Sin lactosa*).
+* **Elementos HTML**: `.preference-chip`, atributo `data-preference`.
+* **Conceptos JS**: Evaluación con múltiples condiciones en `filter()`.
+* **Prompt**: *"Modifica la función `applyFilters()` para filtrar los productos según la categoría seleccionada, la preferencia alimentaria activa y el término de búsqueda ingresado."*
+* **Comprobación**: Seleccionar "Cafés" y "Vegetariano" para verificar que solo se muestren los cafés vegetarianos.
+
+---
+
+### Paso 20: Calculadora de Propina Sugerida
+* **Objetivo**: Permitir al usuario seleccionar un porcentaje de propina (10%, 15%, 20%) en el modal del pedido y recalcular el total final.
+* **Elementos HTML**: `.tip-button`, `#tip-detail-text`, `#modal-order-total`.
+* **Conceptos JS**: Operaciones matemáticas porcentuales y renderizado interactivo del subtotal y total.
+* **Prompt**: *"Agrega listeners a los botones de propina dentro del modal para calcular el importe adicional y refrescar el total final a pagar."*
+* **Comprobación**: Seleccionar 10% de propina y comprobar que el total a pagar se incrementa correctamente.
+
+---
+
+### Paso 21: Asistencia Rápida ("Llamar al mozo" y "Pedir la cuenta")
+* **Objetivo**: Notificar visualmente al usuario cuando presiona los botones de llamado al mozo o solicitud de cuenta.
+* **Elementos HTML**: `#btn-call-waiter`, `#btn-request-check`, `#toast-notice`.
+* **Conceptos JS**: Temporizadores con `setTimeout()`.
+* **Prompt**: *"Crea una función `showToastNotice(icono, mensaje)` que muestre un aviso flotante en la parte superior durante 3.5 segundos utilizando `setTimeout()`."*
+* **Comprobación**: Presionar "🔔 Mozo" y verificar que aparece el aviso flotante y desaparece automáticamente a los 3.5 segundos.
+
+---
+
+### Paso 22: Historial de Consumos de la Mesa
+* **Objetivo**: Guardar cada comanda confirmada en el historial de la mesa para poder consultarla más tarde durante la estadía.
+* **Elementos HTML**: `#btn-open-history`, `#history-modal`, `#history-list`.
+* **Conceptos JS**: Arreglos de objetos en `localStorage`, formateo de la hora con `Date()`.
+* **Prompt**: *"Al confirmar un pedido, guarda una copia de la comanda con la hora y el total abonado en `localStorage`. Crea un modal para consultar el historial de consumos."*
+* **Comprobación**: Confirmar un pedido, abrir el historial y verificar que la comanda anterior figure con la hora exacta y su importe.
+
+---
+
+### Paso 23: Conmutador de Modo Noche / Modo Día (Theme Toggle)
+* **Objetivo**: Permitir al cliente alternar la interfaz entre tema claro y tema oscuro.
+* **Elementos HTML**: `#btn-theme-toggle`, clase `.dark-theme` en `<body>`.
+* **Conceptos JS**: Manipulación de clases con `classList.toggle()`, guardar la preferencia de tema en `localStorage`.
+* **Prompt**: *"Agrega una función para alternar la clase `.dark-theme` en el `body` al hacer clic en el botón de tema, y guarda la preferencia del usuario en `localStorage`."*
+* **Comprobación**: Presionar el botón de tema, verificar que la pantalla cambia a colores oscuros y recargar la página para comprobar que el tema persiste.
+
+---
+
 ## 👩‍🏫 Créditos y Licencia
 
 Proyecto desarrollado para las clases de **Diseño Web · CFP N° 27**.  

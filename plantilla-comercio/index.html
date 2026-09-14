@@ -31,12 +31,23 @@
           <p>Café de especialidad, cocina de estación y pastelería artesanal.</p>
         </div>
         
-        <!-- ETIQUETA DE MESA Y ESTADO -->
+        <!-- ETIQUETA DE MESA, BOTONES DE ASISTENCIA Y CONMUTADOR DE TEMA -->
         <div class="table-info" aria-label="Información del cliente">
-          <span class="status-dot" aria-hidden="true"></span>
-          <div>
-            <strong>Mesa 04</strong>
-            <small>Abierto · Cocina hasta 23:00hs</small>
+          <div class="table-header-row">
+            <span class="status-dot" aria-hidden="true"></span>
+            <div>
+              <strong>Mesa 04</strong>
+              <small>Abierto · Cocina hasta 23:00hs</small>
+            </div>
+            <!-- BOTÓN DE MODO NOCHE / DÍA -->
+            <button id="btn-theme-toggle" class="icon-button" type="button" aria-label="Cambiar tema de la página">🌙</button>
+          </div>
+
+          <!-- BOTONES DE ASISTENCIA RÁPIDA -->
+          <div class="header-actions">
+            <button id="btn-call-waiter" class="header-action-button" type="button">🔔 Mozo</button>
+            <button id="btn-request-check" class="header-action-button" type="button">💳 Cuenta</button>
+            <button id="btn-open-history" class="header-action-button" type="button">📜 Historial</button>
           </div>
         </div>
       </div>
@@ -45,7 +56,7 @@
     <!-- CONTENEDOR PRINCIPAL DE LA CARTA -->
     <div class="page-shell">
 
-      <!-- CONTROLES: BUSCADOR Y FILTROS POR CATEGORÍA -->
+      <!-- CONTROLES: BUSCADOR Y FILTROS POR CATEGORÍA Y PREFERENCIA -->
       <section class="menu-controls" aria-label="Búsqueda y filtros">
         
         <!-- CAMPO DE BÚSQUEDA -->
@@ -66,6 +77,15 @@
           <button class="category-button" type="button" data-category="Desayunos">Desayunos</button>
           <button class="category-button" type="button" data-category="Platos">Platos</button>
           <button class="category-button" type="button" data-category="Dulces">Dulces</button>
+        </div>
+
+        <!-- FILTROS MÚLTIPLES POR PREFERENCIA ALIMENTARIA -->
+        <div class="preference-filters" role="group" aria-label="Filtro por preferencia alimentaria">
+          <span class="filter-label">Preferencia:</span>
+          <button class="preference-chip is-active" type="button" data-preference="Todas">Todas</button>
+          <button class="preference-chip" type="button" data-preference="Vegetariano">Vegetariano</button>
+          <button class="preference-chip" type="button" data-preference="Vegano">Vegano</button>
+          <button class="preference-chip" type="button" data-preference="Sin lactosa">Sin lactosa</button>
         </div>
       </section>
 
@@ -91,6 +111,12 @@
       </button>
     </aside>
 
+    <!-- TOAST DE NOTIFICACIÓN TEMPORAL (MOZO / CUENTA) -->
+    <div class="toast-notice is-hidden" id="toast-notice" role="status">
+      <span id="toast-notice-icon">🔔</span>
+      <span id="toast-notice-msg">Mozo notificado a la Mesa 04</span>
+    </div>
+
     <!-- MODAL DE DETALLE Y GESTIÓN DEL PEDIDO -->
     <div class="modal-overlay is-hidden" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="modal-order-title">
       <div class="modal-card">
@@ -109,9 +135,23 @@
             <!-- Renderizado dinámico desde JS -->
           </ul>
 
+          <!-- SELECTOR DE PROPINAS SUGERIDAS -->
+          <div class="tip-section">
+            <span class="tip-title">Propina sugerida</span>
+            <div class="tip-buttons">
+              <button type="button" class="tip-button is-active" data-tip="0">0%</button>
+              <button type="button" class="tip-button" data-tip="10">10%</button>
+              <button type="button" class="tip-button" data-tip="15">15%</button>
+              <button type="button" class="tip-button" data-tip="20">20%</button>
+            </div>
+          </div>
+
           <!-- Resumen con el costo total -->
           <div class="order-total-block">
-            <span>Total a pagar</span>
+            <div>
+              <span>Total a pagar</span>
+              <small id="tip-detail-text" style="display:block; color:#7A6F68; font-size:12px;">Sin propina</small>
+            </div>
             <strong id="modal-order-total">$0</strong>
           </div>
         </div>
@@ -124,6 +164,9 @@
             Confirmar pedido
           </button>
         </div>
+
+      </div>
+    </div>
 
     <!-- MODAL DE CONFIRMACIÓN DE PEDIDO EXITOSO -->
     <div class="modal-overlay is-hidden" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
@@ -142,6 +185,31 @@
         <div class="modal-actions modal-actions--center">
           <button type="button" class="button button--primary" id="btn-close-success-modal">
             Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE HISTORIAL DE CONSUMOS DE LA MESA -->
+    <div class="modal-overlay is-hidden" id="history-modal" role="dialog" aria-modal="true" aria-labelledby="history-modal-title">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h2 id="history-modal-title">Consumos de la Mesa 04</h2>
+            <small>Historial de comandas enviadas durante la estadía</small>
+          </div>
+          <button type="button" class="modal-close" id="btn-close-history-modal" aria-label="Cerrar modal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+          <div class="history-list" id="history-list">
+            <!-- Carga dinámica del historial desde JS -->
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="button button--secondary" id="btn-close-history">
+            Cerrar
           </button>
         </div>
       </div>
