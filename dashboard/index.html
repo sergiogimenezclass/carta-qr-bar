@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Panel docente para administrar las cartas digitales del curso."
+      content="Panel docente para administrar las cartas digitales del curso con generación de códigos QR."
     />
     <title>Cartas del curso | Panel docente</title>
+    
+    <!-- FUENTES GOOGLE: Outfit para títulos elegantes y DM Sans para el cuerpo de texto -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    
+    <!-- HOJA DE ESTILOS DEL DASHBOARD -->
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+
+    <!-- BARRA SUPERIOR: Identidad de la marca y perfil docente -->
     <header class="topbar">
       <a class="brand" href="#" aria-label="Ir al inicio">
         <span class="brand__mark" aria-hidden="true">27</span>
@@ -35,43 +41,49 @@
       </div>
     </header>
 
+    <!-- CONTENEDOR PRINCIPAL -->
     <main class="page-shell">
+      
+      <!-- ENCABEZADO DE PÁGINA Y RESUMEN ESTADÍSTICO -->
       <section class="page-heading" aria-labelledby="page-title">
         <div>
           <p class="eyebrow">Ciclo lectivo 2026</p>
           <h1 id="page-title">Cartas digitales</h1>
           <p class="page-heading__intro">
-            Consultá los comercios asignados y accedé a cada proyecto publicado.
+            Consultá los comercios asignados, registrá nuevos lugares y accedé a los códigos QR de cada carta publicada.
           </p>
         </div>
 
+        <!-- RESUMEN DINÁMICO: Contadores que se actualizan con JS -->
         <div class="summary" aria-label="Resumen del curso">
           <div>
-            <strong>10</strong>
+            <strong id="summary-total">0</strong>
             <span>comercios</span>
           </div>
           <div>
-            <strong>0</strong>
+            <strong id="summary-published">0</strong>
             <span>publicados</span>
           </div>
         </div>
       </section>
 
+      <!-- ÁREA DE TRABAJO (GRID DE DOS COLUMNAS) -->
       <section class="workspace" aria-label="Consulta de comercios">
+        
+        <!-- COLUMNA 1: SELECTOR Y LISTADO DE COMERCIOS -->
         <div class="selector-panel">
+          
+          <!-- Botón principal para agregar un nuevo comercio -->
+          <div class="panel-actions">
+            <button class="button button--accent" type="button" id="btn-open-create-modal">
+              + Nuevo comercio
+            </button>
+          </div>
+
           <label for="comercio">Elegí un comercio</label>
           <div class="select-wrap">
             <select id="comercio" name="comercio">
-              <option value="cafe-nomade">Café Nómade</option>
-              <option value="bruma-cafe">Bruma Café</option>
-              <option value="patio-central">Patio Central</option>
-              <option value="esquina-verde">La Esquina Verde</option>
-              <option value="tostado-club">Tostado Club</option>
-              <option value="bodega-urbana">Bodega Urbana</option>
-              <option value="miga-miel">Miga y Miel</option>
-              <option value="fuego-lento">Fuego Lento</option>
-              <option value="estacion-cafe">Estación Café</option>
-              <option value="terraza-sur">Terraza Sur</option>
+              <!-- Las opciones se generan dinámicamente desde JavaScript -->
             </select>
           </div>
           <p class="field-help">La información se actualizará al cambiar la selección.</p>
@@ -79,75 +91,133 @@
           <div class="commerce-list" aria-labelledby="commerce-list-title">
             <div class="section-label">
               <h2 id="commerce-list-title">Comercios del curso</h2>
-              <span>10 lugares</span>
+              <span id="commerce-list-count">0 lugares</span>
             </div>
 
-            <ol>
-              <li class="is-active"><span>01</span>Café Nómade</li>
-              <li><span>02</span>Bruma Café</li>
-              <li><span>03</span>Patio Central</li>
-              <li><span>04</span>La Esquina Verde</li>
-              <li><span>05</span>Tostado Club</li>
-              <li><span>06</span>Bodega Urbana</li>
-              <li><span>07</span>Miga y Miel</li>
-              <li><span>08</span>Fuego Lento</li>
-              <li><span>09</span>Estación Café</li>
-              <li><span>10</span>Terraza Sur</li>
+            <!-- Lista interactiva de comercios renderizada por JS -->
+            <ol id="commerce-ol-list">
+              <!-- Cargado dinámicamente -->
             </ol>
           </div>
         </div>
 
-        <article class="commerce-card">
+        <!-- COLUMNA 2: TARJETA DEL COMERCIO SELECCIONADO (DETALLE + QR) -->
+        <article class="commerce-card" id="commerce-card-detail">
+          
+          <!-- Encabezado de la tarjeta -->
           <div class="commerce-card__header">
             <div>
-              <span class="status"><i aria-hidden="true"></i> En construcción</span>
-              <h2>Café Nómade</h2>
-              <p>Cafetería</p>
+              <span class="status" id="card-status-badge">
+                <i aria-hidden="true"></i> <span id="card-status-text">Cargando...</span>
+              </span>
+              <h2 id="card-name">Cargando...</h2>
+              <p id="card-type">Cargando...</p>
             </div>
-            <span class="commerce-number" aria-label="Comercio número 1">01</span>
+            <span class="commerce-number" id="card-number" aria-label="Número de comercio">01</span>
           </div>
 
+          <!-- Cuerpo de la tarjeta -->
           <div class="commerce-card__body">
+            
+            <!-- DATOS DEL SITIO Y ENLACES -->
             <div class="site-data">
               <div class="data-block">
                 <span>Nombre exacto en Netlify</span>
-                <code>cafe-nomade-cfp27-2026-01</code>
+                <code id="card-netlify-name">Pendiente</code>
               </div>
 
               <div class="data-block">
                 <span>Dirección pública asignada</span>
-                <a href="https://cafe-nomade-cfp27-2026-01.netlify.app">
-                  cafe-nomade-cfp27-2026-01.netlify.app
+                <a id="card-url-link" href="#" target="_blank" rel="noopener noreferrer">
+                  Sin dirección pública cargada
                 </a>
               </div>
 
+              <!-- ACCIONES PRINCIPALES DEL COMERCIO -->
               <div class="actions" aria-label="Acciones del comercio">
-                <button class="button button--primary" type="button" disabled>
+                <a class="button button--primary" id="btn-open-site" href="#" target="_blank" rel="noopener noreferrer">
                   Abrir carta
-                </button>
-                <button class="button button--secondary" type="button" disabled>
+                </a>
+                <button class="button button--secondary" id="btn-copy-url" type="button">
                   Copiar URL
+                </button>
+                <button class="button button--secondary" id="btn-edit-commerce" type="button">
+                  Editar
+                </button>
+                <button class="button button--danger" id="btn-delete-commerce" type="button">
+                  Eliminar
                 </button>
               </div>
             </div>
 
+            <!-- VISOR Y GENERADOR DE CÓDIGO QR -->
             <div class="qr-panel">
-              <div class="qr-placeholder" aria-label="Espacio reservado para el código QR">
-                <span>QR</span>
+              <div class="qr-box" id="qr-container" aria-label="Código QR del comercio">
+                <div class="qr-placeholder" id="qr-placeholder">
+                  <span>QR</span>
+                </div>
+                <img id="qr-image" src="" alt="Código QR del comercio" class="qr-img is-hidden" />
               </div>
-              <strong>Escaneá para abrir la carta</strong>
-              <p>El código estará disponible en la próxima etapa.</p>
+              <strong id="qr-title">Escaneá para abrir la carta</strong>
+              <p id="qr-description">El código estará disponible cuando se cargue la URL pública.</p>
+
+              <!-- Botón para descargar la imagen del QR -->
+              <button class="button button--secondary button--small is-hidden" id="btn-download-qr" type="button">
+                Descargar QR
+              </button>
             </div>
           </div>
 
+          <!-- Pie de la tarjeta -->
           <footer class="commerce-card__footer">
-            <span>El sitio todavía no fue publicado.</span>
-            <span>Última revisión: pendiente</span>
+            <span id="card-footer-status">Estado: pendiente</span>
+            <span id="card-footer-revision">Última actualización: hoy</span>
           </footer>
         </article>
       </section>
     </main>
 
+    <!-- MODAL PARA ALTA Y EDICIÓN DE COMERCIOS -->
+    <div class="modal-overlay is-hidden" id="commerce-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 id="modal-title">Nuevo Comercio</h2>
+          <button type="button" class="modal-close" id="btn-close-modal" aria-label="Cerrar modal">&times;</button>
+        </div>
+        
+        <form id="commerce-form" class="modal-form">
+          <input type="hidden" id="form-commerce-id" value="" />
+          
+          <div class="form-group">
+            <label for="form-nombre">Nombre del comercio *</label>
+            <input type="text" id="form-nombre" required placeholder="Ej: Bruma Café" />
+          </div>
+
+          <div class="form-group">
+            <label for="form-tipo">Tipo de comercio *</label>
+            <input type="text" id="form-tipo" required placeholder="Ej: Cafetería, Bar, Restaurante" />
+          </div>
+
+          <div class="form-group">
+            <label for="form-netlify-name">Nombre exacto en Netlify</label>
+            <input type="text" id="form-netlify-name" placeholder="Ej: bruma-cafe-cfp27-2026-02" />
+          </div>
+
+          <div class="form-group">
+            <label for="form-url">Dirección pública de Netlify (URL)</label>
+            <input type="url" id="form-url" placeholder="Ej: https://bruma-cafe-cfp27-2026-02.netlify.app" />
+            <small class="field-help">Al ingresar la URL, el código QR se generará automáticamente.</small>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="button button--secondary" id="btn-cancel-modal">Cancelar</button>
+            <button type="submit" class="button button--primary" id="btn-save-modal">Guardar comercio</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- SCRIPT DE LÓGICA DEL DASHBOARD -->
     <script src="js/comercios.js"></script>
   </body>
 </html>
