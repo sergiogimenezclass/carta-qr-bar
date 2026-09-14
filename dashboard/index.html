@@ -217,6 +217,25 @@
       </div>
     </div>
 
+    <!-- MODAL PROPIO DE CONFIRMACIÓN PARA ELIMINAR COMERCIO -->
+    <div class="modal-overlay is-hidden" id="delete-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+      <div class="modal-card modal-card--danger">
+        <div class="modal-header modal-header--danger">
+          <h2 id="delete-modal-title">¿Eliminar comercio?</h2>
+          <button type="button" class="modal-close" id="btn-close-delete-modal" aria-label="Cerrar modal">&times;</button>
+        </div>
+        
+        <div class="modal-body-content">
+          <p id="delete-modal-message">¿Estás seguro de que querés eliminar este comercio? Esta acción no se puede deshacer.</p>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="button button--secondary" id="btn-cancel-delete">Cancelar</button>
+          <button type="button" class="button button--danger-solid" id="btn-confirm-delete">Sí, eliminar</button>
+        </div>
+      </div>
+    </div>
+
     <!-- SCRIPT DE LÓGICA DEL DASHBOARD -->
     <script src="js/comercios.js"></script>
   </body>

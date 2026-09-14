@@ -352,21 +352,43 @@ commerceForm.addEventListener("submit", (e) => {
   renderUI();
 });
 
-// Eliminar un comercio (Baja)
-btnDeleteCommerce.addEventListener("click", () => {
+// Elementos del Modal de Eliminación
+const deleteConfirmModal = document.querySelector("#delete-confirm-modal");
+const deleteModalMessage = document.querySelector("#delete-modal-message");
+const btnCloseDeleteModal = document.querySelector("#btn-close-delete-modal");
+const btnCancelDelete = document.querySelector("#btn-cancel-delete");
+const btnConfirmDelete = document.querySelector("#btn-confirm-delete");
+
+function openDeleteModal() {
   const comercio = comerciosList.find(c => c.id === selectedCommerceId);
   if (!comercio) return;
+  
+  deleteModalMessage.textContent = `¿Estás seguro de que querés eliminar "${comercio.nombre}"? Esta acción no se puede deshacer.`;
+  deleteConfirmModal.classList.remove("is-hidden");
+}
 
-  const confirmDelete = confirm(`¿Estás seguro de que querés eliminar "${comercio.nombre}"?`);
-  if (!confirmDelete) return;
+function closeDeleteModal() {
+  deleteConfirmModal.classList.add("is-hidden");
+}
 
-  comerciosList = comerciosList.filter(c => c.id !== comercio.id);
+btnDeleteCommerce.addEventListener("click", openDeleteModal);
+btnCloseDeleteModal.addEventListener("click", closeDeleteModal);
+btnCancelDelete.addEventListener("click", closeDeleteModal);
+
+deleteConfirmModal.addEventListener("click", (e) => {
+  if (e.target === deleteConfirmModal) closeDeleteModal();
+});
+
+// Confirmación de eliminación en el modal propio
+btnConfirmDelete.addEventListener("click", () => {
+  comerciosList = comerciosList.filter(c => c.id !== selectedCommerceId);
   saveToLocalStorage();
 
   if (comerciosList.length > 0) {
     selectedCommerceId = comerciosList[0].id;
   }
 
+  closeDeleteModal();
   renderUI();
 });
 
