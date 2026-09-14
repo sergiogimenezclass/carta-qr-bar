@@ -1,8 +1,17 @@
+/*
+===============================================================================
+BASE DE DATOS DE PRODUCTOS DE MUESTRA (productos.js)
+===============================================================================
+Este archivo contiene la lista de productos disponibles en el comercio.
+Cada producto es un objeto JavaScript con sus propiedades principales.
+===============================================================================
+*/
+
 const productos = [
   {
     id: 1,
     nombre: "Latte Nómade",
-    descripcion: "Espresso doble, leche texturizada y un toque de miel.",
+    descripcion: "Espresso doble, leche texturizada y un toque de miel orgánica.",
     precio: 4800,
     categoria: "Cafés",
     preferencia: "Vegetariano",
@@ -12,8 +21,8 @@ const productos = [
   },
   {
     id: 2,
-    nombre: "Flat white",
-    descripcion: "Doble ristretto con leche sedosa y sabor intenso.",
+    nombre: "Flat White",
+    descripcion: "Doble ristretto con leche sedosa y sabor intenso a café.",
     precio: 4500,
     categoria: "Cafés",
     preferencia: "Vegetariano",
@@ -23,8 +32,8 @@ const productos = [
   },
   {
     id: 3,
-    nombre: "Cold brew cítrico",
-    descripcion: "Café infusionado en frío, naranja y agua tónica.",
+    nombre: "Cold Brew Cítrico",
+    descripcion: "Café infusionado en frío durante 18hs, rodaja de naranja y tónica.",
     precio: 5200,
     categoria: "Bebidas frías",
     preferencia: "Vegano",
@@ -34,8 +43,8 @@ const productos = [
   },
   {
     id: 4,
-    nombre: "Limonada de estación",
-    descripcion: "Limón, almíbar casero, menta y fruta de estación.",
+    nombre: "Limonada Menta y Jengibre",
+    descripcion: "Limón fresco, menta de la huerta, almíbar casero y jengibre.",
     precio: 4300,
     categoria: "Bebidas frías",
     preferencia: "Vegano",
@@ -45,8 +54,8 @@ const productos = [
   },
   {
     id: 5,
-    nombre: "Tostón del patio",
-    descripcion: "Pan de masa madre, palta, huevo poché y hojas frescas.",
+    nombre: "Tostón Palta y Huevo",
+    descripcion: "Pan de masa madre, palta pisada, huevo poché y semillas de sésamo.",
     precio: 8900,
     categoria: "Desayunos",
     preferencia: "Sin lactosa",
@@ -56,8 +65,8 @@ const productos = [
   },
   {
     id: 6,
-    nombre: "Yogur con granola",
-    descripcion: "Yogur natural, granola de la casa, miel y frutas.",
+    nombre: "Yogur con Granola y Miel",
+    descripcion: "Yogur natural artesanal, granola horneada en casa y frutas frescas.",
     precio: 6100,
     categoria: "Desayunos",
     preferencia: "Vegetariano",
@@ -67,8 +76,8 @@ const productos = [
   },
   {
     id: 7,
-    nombre: "Sándwich de focaccia",
-    descripcion: "Focaccia, vegetales asados, queso y pesto suave.",
+    nombre: "Sándwich de Focaccia",
+    descripcion: "Focaccia casera, vegetales asados, queso halloumi y pesto de albahaca.",
     precio: 9800,
     categoria: "Platos",
     preferencia: "Vegetariano",
@@ -78,19 +87,19 @@ const productos = [
   },
   {
     id: 8,
-    nombre: "Bowl del mercado",
-    descripcion: "Arroz yamaní, calabaza, verdes, semillas y tahini.",
+    nombre: "Bowl del Mercado",
+    descripcion: "Arroz yamaní, calabaza asada, verdes de estación y aderezo tahini.",
     precio: 9400,
     categoria: "Platos",
     preferencia: "Vegano",
     imagen: "toston.png",
     destacado: "",
-    disponible: false,
+    disponible: false, // Ejemplo de producto agotado
   },
   {
     id: 9,
-    nombre: "Torta húmeda",
-    descripcion: "Chocolate semiamargo, ganache y sal marina.",
+    nombre: "Torta Húmeda de Chocolate",
+    descripcion: "Chocolate semiamargo al 70%, ganache suave y escamas de sal marina.",
     precio: 6200,
     categoria: "Dulces",
     preferencia: "Vegetariano",
@@ -100,8 +109,8 @@ const productos = [
   },
   {
     id: 10,
-    nombre: "Roll de canela",
-    descripcion: "Masa brioche, canela, nueces y glaseado de naranja.",
+    nombre: "Roll de Canela",
+    descripcion: "Masa de brioche hojaldrada, canela ceylán y glaseado de naranja.",
     precio: 4900,
     categoria: "Dulces",
     preferencia: "Vegetariano",
@@ -111,8 +120,8 @@ const productos = [
   },
   {
     id: 11,
-    nombre: "Cookie de chocolate",
-    descripcion: "Chocolate amargo, nueces pecán y centro suave.",
+    nombre: "Cookie Choco-Nuez",
+    descripcion: "Galleta horneada en el día con trozos de chocolate amargo y nueces.",
     precio: 3500,
     categoria: "Dulces",
     preferencia: "Vegetariano",
@@ -122,13 +131,13 @@ const productos = [
   },
   {
     id: 12,
-    nombre: "Affogato",
-    descripcion: "Helado de vainilla artesanal y espresso recién hecho.",
+    nombre: "Affogato de Vainilla",
+    descripcion: "Bocha de helado de vainilla artesanal bañada con espresso caliente.",
     precio: 5800,
     categoria: "Cafés",
     preferencia: "Vegetariano",
     imagen: "latte.png",
     destacado: "",
     disponible: true,
-  },
+  }
 ];

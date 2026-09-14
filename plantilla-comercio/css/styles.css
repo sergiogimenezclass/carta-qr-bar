@@ -1,0 +1,561 @@
+/*
+===============================================================================
+ESTILOS DE LA CARTA DIGITAL: CRAFT STUDIO / GASTROBAR
+===============================================================================
+Reglas pedagógicas del curso:
+1. Sin variables CSS de color: valores escritos directamente en formato hexadecimal.
+2. Layout General maquetado con CSS Grid.
+3. Componentes internos estructurados con Flexbox.
+4. Unidades de medida exclusivas: únicamente PÍXELES (px) y PORCENTAJES (%).
+===============================================================================
+*/
+
+/* RESET Y TIPOGRAFÍA BASE */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0px;
+  min-width: 320px;
+  min-height: 800px;
+  color: #1E1B18;
+  background-color: #F5EFE6;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  padding-bottom: 110px; /* Espacio para que la barra flotante no tape contenido */
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, p {
+  margin-top: 0px;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Outfit", sans-serif;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0px;
+  overflow: hidden;
+  clip: rect(0px, 0px, 0px, 0px);
+  border: 0px;
+}
+
+/* ===========================================================================
+   1. CABECERA DEL LOCAL (HERO): FLEXBOX
+   =========================================================================== */
+.menu-hero {
+  padding: 32px 24px;
+  border-bottom: 1px solid #DDD0C2;
+  background-color: #1E1B18;
+  color: #FFFFFF;
+}
+
+.menu-hero__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.brand-badge {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: #FFFFFF;
+  background-color: #C86D51;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.brand-identity h1 {
+  margin-bottom: 4px;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.brand-identity p {
+  margin-bottom: 0px;
+  color: #DDD0C2;
+  font-size: 14px;
+}
+
+.table-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #3E7A5E;
+}
+
+.table-info strong {
+  display: block;
+  font-family: "Outfit", sans-serif;
+  font-size: 16px;
+}
+
+.table-info small {
+  display: block;
+  color: #DDD0C2;
+  font-size: 12px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.page-shell {
+  width: 100%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 24px 16px;
+}
+
+/* ===========================================================================
+   2. CONTROLES: BUSCADOR Y FILTROS POR CATEGORÍA (GRID)
+   =========================================================================== */
+.menu-controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.search-box input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 18px;
+  border: 1px solid #DDD0C2;
+  border-radius: 14px;
+  background-color: #FFFFFF;
+  color: #1E1B18;
+}
+
+.search-box input:focus {
+  outline: 2px solid #C86D51;
+}
+
+.category-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.category-button {
+  flex-shrink: 0;
+  min-height: 40px;
+  padding: 8px 18px;
+  border: 1px solid #DDD0C2;
+  border-radius: 20px;
+  color: #1E1B18;
+  background-color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.category-button.is-active,
+.category-button:hover {
+  color: #FFFFFF;
+  background-color: #C86D51;
+  border-color: #C86D51;
+}
+
+/* ===========================================================================
+   3. GRILLA DE PRODUCTOS (LAYOUT GENERAL CON CSS GRID)
+   =========================================================================== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* TARJETA DE PRODUCTO: COMPONENTES CON FLEXBOX */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #DDD0C2;
+  border-radius: 18px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 16px rgba(30, 27, 24, 0.04);
+  overflow: hidden;
+}
+
+.product-image {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  background-color: #EFE9DF;
+}
+
+.product-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  color: #FFFFFF;
+  background-color: #1E1B18;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  color: #1E1B18;
+  background-color: #FFFFFF;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-button.is-favorite {
+  color: #D32F2F;
+}
+
+.product-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 18px;
+}
+
+.product-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.product-title-row h3 {
+  margin-bottom: 0px;
+  font-size: 18px;
+}
+
+.product-title-row strong {
+  color: #C86D51;
+  font-family: "Outfit", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.product-content p {
+  flex-grow: 1;
+  margin-bottom: 14px;
+  color: #7A6F68;
+  font-size: 14px;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #DDD0C2;
+}
+
+.product-footer span {
+  color: #7A6F68;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* PRODUCTO AGOTADO */
+.product-card.is-sold-out {
+  opacity: 0.6;
+}
+
+/* ESTADO SIN RESULTADOS */
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 48px 24px;
+  border: 1px dashed #DDD0C2;
+  border-radius: 18px;
+  background-color: #FFFFFF;
+  text-align: center;
+}
+
+.empty-state strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.empty-state p {
+  margin-bottom: 0px;
+  color: #7A6F68;
+}
+
+/* ===========================================================================
+   4. BARRA FLOTANTE DEL PEDIDO (STICKY FOOTER): FLEXBOX
+   =========================================================================== */
+.sticky-order-bar {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  border: 1px solid #DDD0C2;
+  border-radius: 20px;
+  background-color: #1E1B18;
+  color: #FFFFFF;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 900;
+}
+
+.sticky-order-bar__info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: #FFFFFF;
+  background-color: #C86D51;
+  font-family: "Outfit", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.sticky-order-bar__info small {
+  display: block;
+  color: #DDD0C2;
+  font-size: 12px;
+}
+
+.sticky-order-bar__info strong {
+  display: block;
+  font-size: 15px;
+}
+
+/* BOTONES GENERALES */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button--primary {
+  color: #FFFFFF;
+  background-color: #C86D51;
+}
+
+.button--primary:hover {
+  background-color: #B25C42;
+}
+
+.button--secondary {
+  border-color: #DDD0C2;
+  color: #1E1B18;
+  background-color: #FFFFFF;
+}
+
+.button--secondary:hover {
+  background-color: #F5EFE6;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* ===========================================================================
+   5. MODAL DE PEDIDO: FLEXBOX
+   =========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: rgba(30, 27, 24, 0.6);
+  z-index: 1000;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #DDD0C2;
+  background-color: #1E1B18;
+  color: #FFFFFF;
+}
+
+.modal-header h2 {
+  margin-bottom: 2px;
+  font-size: 20px;
+}
+
+.modal-header small {
+  color: #DDD0C2;
+  font-size: 13px;
+}
+
+.modal-close {
+  border: none;
+  color: #FFFFFF;
+  background: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.order-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0px 0px 20px 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid #DDD0C2;
+  border-radius: 12px;
+  background-color: #F5EFE6;
+}
+
+.order-item-row strong {
+  font-size: 15px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity-controls button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #DDD0C2;
+  border-radius: 8px;
+  color: #1E1B18;
+  background-color: #FFFFFF;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.order-total-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background-color: #EFE9DF;
+}
+
+.order-total-block strong {
+  color: #C86D51;
+  font-family: "Outfit", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid #DDD0C2;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+/* RESPONSIVE EN PIXELES */
+@media (max-width: 600px) {
+  .menu-hero__container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .table-info {
+    width: 100%;
+  }
+}

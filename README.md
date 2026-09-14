@@ -49,7 +49,7 @@ El proyecto debe seguir estrictamente estas convenciones de maquetación:
 Los alumnos pueden realizar la actividad siguiendo cualquiera de estas dos modalidades según su ritmo de aprendizaje:
 
 ### 🔹 Camino A: Usar la maqueta resuelta
-Los alumnos parten de la maqueta completa en `plantilla-alumnos/` (HTML y CSS terminados) y se concentran en aprender a conectar los datos e incorporar las funcionalidades de JavaScript paso a paso.
+Los alumnos parten de la maqueta completa en `plantilla-comercio/` (HTML y CSS terminados) y se concentran en aprender a conectar los datos e incorporar las funcionalidades de JavaScript paso a paso.
 
 ### 🔹 Camino B: Construir la maqueta desde cero
 Los alumnos escriben el HTML semántico y los estilos CSS desde cero, aplicando la normativa de Grid, Flexbox y medidas. Luego incorporan la interactividad con JavaScript mediante los prompts.
@@ -60,7 +60,7 @@ Los alumnos escriben el HTML semántico y los estilos CSS desde cero, aplicando 
 
 ```text
 carta-cafe-bar/
-├── plantilla-alumnos/          # Proyecto principal de la carta para estudiantes
+├── plantilla-comercio/          # Proyecto principal de la carta para estudiantes
 │   ├── index.html              # Estructura semántica de la carta
 │   ├── css/
 │   │   └── styles.css          # Estilos visuales de la carta
