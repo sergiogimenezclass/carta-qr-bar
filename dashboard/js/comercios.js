@@ -67,6 +67,7 @@ const cardFooterStatus = document.querySelector("#card-footer-status");
 const commerceModal = document.querySelector("#commerce-modal");
 const modalTitle = document.querySelector("#modal-title");
 const commerceForm = document.querySelector("#commerce-form");
+const formAlertMsg = document.querySelector("#form-alert-msg");
 const formCommerceId = document.querySelector("#form-commerce-id");
 const formNombre = document.querySelector("#form-nombre");
 const formTipo = document.querySelector("#form-tipo");
@@ -243,14 +244,14 @@ commerceOlList.addEventListener("click", (e) => {
 btnCopyUrl.addEventListener("click", async () => {
   const comercio = comerciosList.find(c => c.id === selectedCommerceId);
   if (comercio && comercio.url) {
+    const originalText = btnCopyUrl.textContent;
     try {
       await navigator.clipboard.writeText(comercio.url);
-      const originalText = btnCopyUrl.textContent;
       btnCopyUrl.textContent = "¡Copiado!";
-      setTimeout(() => { btnCopyUrl.textContent = originalText; }, 2000);
     } catch (err) {
-      alert("No se pudo copiar la URL automáticamente.");
+      btnCopyUrl.textContent = "Error al copiar";
     }
+    setTimeout(() => { btnCopyUrl.textContent = originalText; }, 2000);
   }
 });
 
@@ -282,7 +283,10 @@ btnDownloadQr.addEventListener("click", async () => {
 // ===========================================================================
 
 function openModal(isEditMode = false) {
+  formAlertMsg.classList.add("is-hidden");
+  formAlertMsg.textContent = "";
   commerceModal.classList.remove("is-hidden");
+  
   if (isEditMode) {
     const comercio = comerciosList.find(c => c.id === selectedCommerceId);
     if (!comercio) return;
@@ -300,6 +304,8 @@ function openModal(isEditMode = false) {
 }
 
 function closeModal() {
+  formAlertMsg.classList.add("is-hidden");
+  formAlertMsg.textContent = "";
   commerceModal.classList.add("is-hidden");
   commerceForm.reset();
 }
@@ -317,6 +323,8 @@ commerceModal.addEventListener("click", (e) => {
 // Enviar formulario (Crear o Editar un comercio)
 commerceForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  formAlertMsg.classList.add("is-hidden");
+  formAlertMsg.textContent = "";
   
   const idValue = formCommerceId.value;
   const nuevoComercio = {
@@ -328,7 +336,8 @@ commerceForm.addEventListener("submit", (e) => {
   };
 
   if (!nuevoComercio.nombre || !nuevoComercio.tipo) {
-    alert("Por favor completá el nombre y el tipo de comercio.");
+    formAlertMsg.textContent = "Por favor completá el nombre y el tipo de comercio.";
+    formAlertMsg.classList.remove("is-hidden");
     return;
   }
 
