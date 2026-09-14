@@ -125,6 +125,25 @@
           </button>
         </div>
 
+    <!-- MODAL DE CONFIRMACIÓN DE PEDIDO EXITOSO -->
+    <div class="modal-overlay is-hidden" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+      <div class="modal-card modal-card--success">
+        <div class="success-icon-box">
+          <span>✓</span>
+        </div>
+        
+        <h2 id="success-modal-title">¡Pedido enviado a la cocina!</h2>
+        <p id="success-modal-msg">Muchas gracias. Tu pedido para la <strong>Mesa 04</strong> ya está en preparación.</p>
+        
+        <div class="success-details">
+          <span>Tiempo estimado: <strong>15 - 20 min</strong></span>
+        </div>
+
+        <div class="modal-actions modal-actions--center">
+          <button type="button" class="button button--primary" id="btn-close-success-modal">
+            Entendido
+          </button>
+        </div>
       </div>
     </div>
 

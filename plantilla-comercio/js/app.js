@@ -335,13 +335,25 @@ btnClearOrder.addEventListener("click", () => {
   orderModal.classList.add("is-hidden");
 });
 
+// Elementos del Modal de Confirmación de Éxito
+const successModal = document.querySelector("#success-modal");
+const btnCloseSuccessModal = document.querySelector("#btn-close-success-modal");
+
+btnCloseSuccessModal.addEventListener("click", () => {
+  successModal.classList.add("is-hidden");
+});
+
+successModal.addEventListener("click", (e) => {
+  if (e.target === successModal) successModal.classList.add("is-hidden");
+});
+
 // Confirmar Pedido
 btnConfirmOrder.addEventListener("click", () => {
   if (orderItems.size === 0) return;
-  alert("¡Muchas gracias! Tu pedido ha sido enviado a la cocina de Café Nómade.");
   orderItems.clear();
   updateOrderSummary();
   orderModal.classList.add("is-hidden");
+  successModal.classList.remove("is-hidden");
 });
 
 // --- INICIALIZACIÓN DE LA APLICACIÓN ---
