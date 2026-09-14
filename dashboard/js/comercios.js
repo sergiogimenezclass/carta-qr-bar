@@ -1,9 +1,9 @@
 /*
 ===============================================================================
-LÓGICA JAVASCRIPT DEL DASHBOARD DOCENTE
+LÓGICA JAVASCRIPT DEL DASHBOARD DOCENTE (100% LOCALSTORAGE)
 ===============================================================================
 En este archivo administramos:
-1. La lista de comercios del curso (vía API en Python o fallback en localStorage).
+1. La lista de comercios del curso utilizando únicamente localStorage.
 2. La actualización de la tarjeta seleccionada y sus estadísticas.
 3. La generación automática del Código QR cuando hay una URL de Netlify.
 4. El copiado de URL al portapapeles y la descarga de la imagen QR.
@@ -11,10 +11,10 @@ En este archivo administramos:
 ===============================================================================
 */
 
-// URL de la API REST del servidor Python (VPS o localhost)
-const API_URL = "http://localhost:5000/api/comercios";
+// CLAVE UTILIZADA EN LOCALSTORAGE PARA GUARDAR LOS COMERCIOS EN EL NAVEGADOR
+const LOCAL_STORAGE_KEY = "cartas_comercios_cfp27";
 
-// DATOS INICIALES DE PRUEBA (Se usan si no hay conexión al servidor ni datos guardados)
+// DATOS INICIALES DE PRUEBA (Se cargan la primera vez si localStorage está vacío)
 const COMERCIOS_DEFAULT = [
   { id: 1, nombre: "Café Nómade", tipo: "Cafetería", netlifyName: "cafe-nomade-cfp27-2026-01", url: "https://cafe-nomade-cfp27-2026-01.netlify.app", estado: "en-construccion" },
   { id: 2, nombre: "Bruma Café", tipo: "Cafetería", netlifyName: "bruma-cafe-cfp27-2026-02", url: "https://bruma-cafe-cfp27-2026-02.netlify.app", estado: "en-construccion" },
@@ -28,7 +28,7 @@ const COMERCIOS_DEFAULT = [
   { id: 10, nombre: "Terraza Sur", tipo: "Bar y restaurante", netlifyName: "terraza-sur-cfp27-2026-10", url: "https://terraza-sur-cfp27-2026-10.netlify.app", estado: "en-construccion" }
 ];
 
-// ESTADO GLOBAL DE LA APLICACIÓN
+// ESTADO GLOBAL EN MEMORIA
 let comerciosList = [];
 let selectedCommerceId = 1;
 
@@ -76,28 +76,26 @@ const btnCloseModal = document.querySelector("#btn-close-modal");
 const btnCancelModal = document.querySelector("#btn-cancel-modal");
 
 // ===========================================================================
-// FUNCIONES DE PERSISTENCIA Y CARGA DE DATOS (API / LOCALSTORAGE)
+// FUNCIONES DE PERSISTENCIA CON LOCALSTORAGE
 // ===========================================================================
 
-async function loadComercios() {
-  try {
-    // Intentamos obtener los datos desde el servidor Python
-    const response = await fetch(API_URL);
-    if (!response.ok) throw new Error("Error en la respuesta del servidor");
-    comerciosList = await response.json();
-  } catch (error) {
-    console.warn("Servidor Python no disponible. Usando respaldo en localStorage.");
-    // Fallback: Leer desde localStorage
-    const localData = localStorage.getItem("cartas_comercios");
-    if (localData) {
-      comerciosList = JSON.parse(localData);
-    } else {
-      comerciosList = [...COMERCIOS_DEFAULT];
-      saveToLocalStorage();
-    }
+/**
+ * Carga los comercios guardados en la memoria local del navegador (localStorage).
+ * Si no existen datos previos, inicializa con la lista por defecto y los guarda.
+ */
+function loadComercios() {
+  const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
+  
+  if (localData) {
+    // JSON.parse convierte la cadena de texto de localStorage a un arreglo de objetos JS
+    comerciosList = JSON.parse(localData);
+  } else {
+    // Si es la primera vez, copiamos los comercios por defecto y guardamos
+    comerciosList = [...COMERCIOS_DEFAULT];
+    saveToLocalStorage();
   }
 
-  // Si la lista no está vacía y el ID seleccionado no existe, tomamos el primero
+  // Aseguramos que el ID seleccionado exista dentro del arreglo
   if (comerciosList.length > 0) {
     const exists = comerciosList.some(c => c.id === selectedCommerceId);
     if (!exists) selectedCommerceId = comerciosList[0].id;
@@ -106,8 +104,11 @@ async function loadComercios() {
   renderUI();
 }
 
+/**
+ * Convierte la lista de comercios a texto con JSON.stringify y la guarda en localStorage.
+ */
 function saveToLocalStorage() {
-  localStorage.setItem("cartas_comercios", JSON.stringify(comerciosList));
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(comerciosList));
 }
 
 // ===========================================================================
@@ -183,7 +184,7 @@ function renderSelectedCommerceCard() {
     btnOpenSite.removeAttribute("aria-disabled");
     btnCopyUrl.disabled = false;
 
-    // Generar Código QR utilizando la API de QR rápida
+    // Generar Código QR utilizando la API gratuita de código QR
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(comercio.url)}`;
     qrImage.src = qrUrl;
     qrImage.classList.remove("is-hidden");
@@ -277,7 +278,7 @@ btnDownloadQr.addEventListener("click", async () => {
 });
 
 // ===========================================================================
-// GESTIÓN DEL MODAL (CREACIÓN, EDICIÓN Y ELIMINACIÓN)
+// GESTIÓN DEL MODAL (CREACIÓN, EDICIÓN Y ELIMINACIÓN CON LOCALSTORAGE)
 // ===========================================================================
 
 function openModal(isEditMode = false) {
@@ -313,8 +314,8 @@ commerceModal.addEventListener("click", (e) => {
   if (e.target === commerceModal) closeModal();
 });
 
-// Enviar formulario (Crear / Editar)
-commerceForm.addEventListener("submit", async (e) => {
+// Enviar formulario (Crear o Editar un comercio)
+commerceForm.addEventListener("submit", (e) => {
   e.preventDefault();
   
   const idValue = formCommerceId.value;
@@ -322,7 +323,8 @@ commerceForm.addEventListener("submit", async (e) => {
     nombre: formNombre.value.trim(),
     tipo: formTipo.value.trim(),
     netlifyName: formNetlifyName.value.trim(),
-    url: formUrl.value.trim()
+    url: formUrl.value.trim(),
+    estado: formUrl.value.trim() !== "" ? "publicado" : "en-construccion"
   };
 
   if (!nuevoComercio.nombre || !nuevoComercio.tipo) {
@@ -331,73 +333,32 @@ commerceForm.addEventListener("submit", async (e) => {
   }
 
   if (idValue) {
-    // EDICIÓN (PUT)
+    // EDICIÓN DE COMERCIO EXISTENTE
     const id = Number(idValue);
-    try {
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nuevoComercio)
-      });
-      if (!response.ok) throw new Error();
-      const updatedData = await response.json();
-      const idx = comerciosList.findIndex(c => c.id === id);
-      if (idx !== -1) comerciosList[idx] = updatedData;
-    } catch (err) {
-      // Fallback local
-      const idx = comerciosList.findIndex(c => c.id === id);
-      if (idx !== -1) {
-        comerciosList[idx] = {
-          ...comerciosList[idx],
-          ...nuevoComercio,
-          estado: nuevoComercio.url !== "" ? "publicado" : "en-construccion"
-        };
-        saveToLocalStorage();
-      }
+    const idx = comerciosList.findIndex(c => c.id === id);
+    if (idx !== -1) {
+      comerciosList[idx] = { id, ...nuevoComercio };
     }
   } else {
-    // CREACIÓN (POST)
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nuevoComercio)
-      });
-      if (!response.ok) throw new Error();
-      const createdData = await response.json();
-      comerciosList.push(createdData);
-      selectedCommerceId = createdData.id;
-    } catch (err) {
-      // Fallback local
-      const newId = comerciosList.length > 0 ? Math.max(...comerciosList.map(c => c.id)) + 1 : 1;
-      const createdData = {
-        id: newId,
-        ...nuevoComercio,
-        estado: nuevoComercio.url !== "" ? "publicado" : "en-construccion"
-      };
-      comerciosList.push(createdData);
-      selectedCommerceId = newId;
-      saveToLocalStorage();
-    }
+    // ALTA DE NUEVO COMERCIO
+    const newId = comerciosList.length > 0 ? Math.max(...comerciosList.map(c => c.id)) + 1 : 1;
+    comerciosList.push({ id: newId, ...nuevoComercio });
+    selectedCommerceId = newId;
   }
 
+  // Guardar cambios en localStorage y refrescar la vista
+  saveToLocalStorage();
   closeModal();
   renderUI();
 });
 
 // Eliminar un comercio (Baja)
-btnDeleteCommerce.addEventListener("click", async () => {
+btnDeleteCommerce.addEventListener("click", () => {
   const comercio = comerciosList.find(c => c.id === selectedCommerceId);
   if (!comercio) return;
 
   const confirmDelete = confirm(`¿Estás seguro de que querés eliminar "${comercio.nombre}"?`);
   if (!confirmDelete) return;
-
-  try {
-    await fetch(`${API_URL}/${comercio.id}`, { method: "DELETE" });
-  } catch (err) {
-    console.warn("No se pudo eliminar en la API, aplicando en localStorage");
-  }
 
   comerciosList = comerciosList.filter(c => c.id !== comercio.id);
   saveToLocalStorage();
@@ -405,8 +366,9 @@ btnDeleteCommerce.addEventListener("click", async () => {
   if (comerciosList.length > 0) {
     selectedCommerceId = comerciosList[0].id;
   }
+
   renderUI();
 });
 
-// Inicializamos la aplicación al cargar la página
+// Cargar la aplicación al iniciar
 loadComercios();
