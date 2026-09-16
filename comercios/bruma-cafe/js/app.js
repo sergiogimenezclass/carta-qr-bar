@@ -121,20 +121,14 @@ function initVisualTheme() {
   const estiloUrl = urlParams.get("estilo");
   const validStyles = ["bistro", "urbano", "retro"];
 
-  let estilo = "bistro";
-  if (estiloUrl && validStyles.includes(estiloUrl.toLowerCase())) {
-    estilo = estiloUrl.toLowerCase();
-    localStorage.setItem(LOCAL_STORAGE_STYLE_KEY, estilo);
-  } else {
-    const savedStyle = localStorage.getItem(LOCAL_STORAGE_STYLE_KEY);
-    if (savedStyle && validStyles.includes(savedStyle.toLowerCase())) {
-      estilo = savedStyle.toLowerCase();
-    }
-  }
-
   const themeStylesheet = document.querySelector("#theme-stylesheet");
-  if (themeStylesheet) {
+  if (!themeStylesheet) return;
+
+  // Solo si viene un parámetro explícito en la URL (?estilo=urbano) se sobrescribe el CSS
+  if (estiloUrl && validStyles.includes(estiloUrl.toLowerCase())) {
+    const estilo = estiloUrl.toLowerCase();
     themeStylesheet.href = `css/theme-${estilo}.css`;
+    localStorage.setItem(LOCAL_STORAGE_STYLE_KEY, estilo);
   }
 }
 
