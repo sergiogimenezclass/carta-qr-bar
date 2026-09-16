@@ -133,6 +133,11 @@
                 </a>
               </div>
 
+              <div class="data-block">
+                <span>Estética visual asignada</span>
+                <code id="card-style-name">☕ Bistro Cálido (theme-bistro.css)</code>
+              </div>
+
               <!-- ACCIONES PRINCIPALES DEL COMERCIO -->
               <div class="actions" aria-label="Acciones del comercio">
                 <a class="button button--primary" id="btn-open-site" href="#" target="_blank" rel="noopener noreferrer">
@@ -208,6 +213,52 @@
             <label for="form-url">Dirección pública de Netlify (URL)</label>
             <input type="url" id="form-url" placeholder="Ej: https://bruma-cafe-cfp27-2026-02.netlify.app" />
             <small class="field-help">Al ingresar la URL, el código QR se generará automáticamente.</small>
+          </div>
+
+          <div class="form-group">
+            <label>Estética visual del comercio *</label>
+            <div class="theme-selector-grid" id="theme-selector-grid">
+              
+              <div class="theme-card is-selected" data-style="bistro">
+                <div class="theme-card-header">
+                  <strong>☕ Bistro Cálido</strong>
+                  <span class="theme-check">✓</span>
+                </div>
+                <div class="theme-swatches">
+                  <span class="swatch" style="background-color: #F5EFE6;"></span>
+                  <span class="swatch" style="background-color: #C86D51;"></span>
+                  <span class="swatch" style="background-color: #2C221E;"></span>
+                </div>
+                <small>Ideal para cafeterías, té y pastelerías artesanas.</small>
+              </div>
+
+              <div class="theme-card" data-style="urbano">
+                <div class="theme-card-header">
+                  <strong>🍸 Urbano Moderno</strong>
+                  <span class="theme-check">✓</span>
+                </div>
+                <div class="theme-swatches">
+                  <span class="swatch" style="background-color: #F0F2F5;"></span>
+                  <span class="swatch" style="background-color: #174C38;"></span>
+                  <span class="swatch" style="background-color: #121413;"></span>
+                </div>
+                <small>Ideal para gastrobares, bistrós y coctelerías.</small>
+              </div>
+
+              <div class="theme-card" data-style="retro">
+                <div class="theme-card-header">
+                  <strong>🍺 Retro Clásico</strong>
+                  <span class="theme-check">✓</span>
+                </div>
+                <div class="theme-swatches">
+                  <span class="swatch" style="background-color: #EFE6D5;"></span>
+                  <span class="swatch" style="background-color: #C58F49;"></span>
+                  <span class="swatch" style="background-color: #2A1D17;"></span>
+                </div>
+                <small>Ideal para cervecerías, bodegones y hamburgueserías.</small>
+              </div>
+
+            </div>
           </div>
 
           <div class="modal-actions">

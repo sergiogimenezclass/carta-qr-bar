@@ -16,16 +16,16 @@ const LOCAL_STORAGE_KEY = "cartas_comercios_cfp27";
 
 // DATOS INICIALES DE PRUEBA (Se cargan la primera vez si localStorage está vacío)
 const COMERCIOS_DEFAULT = [
-  { id: 1, nombre: "Café Nómade", tipo: "Cafetería", netlifyName: "cafe-nomade-cfp27-2026-01", url: "https://cafe-nomade-cfp27-2026-01.netlify.app", estado: "en-construccion" },
-  { id: 2, nombre: "Bruma Café", tipo: "Cafetería", netlifyName: "bruma-cafe-cfp27-2026-02", url: "https://bruma-cafe-cfp27-2026-02.netlify.app", estado: "en-construccion" },
-  { id: 3, nombre: "Patio Central", tipo: "Bar", netlifyName: "patio-central-cfp27-2026-03", url: "https://patio-central-cfp27-2026-03.netlify.app", estado: "en-construccion" },
-  { id: 4, nombre: "La Esquina Verde", tipo: "Restaurante", netlifyName: "esquina-verde-cfp27-2026-04", url: "https://esquina-verde-cfp27-2026-04.netlify.app", estado: "en-construccion" },
-  { id: 5, nombre: "Tostado Club", tipo: "Cafetería", netlifyName: "tostado-club-cfp27-2026-05", url: "https://tostado-club-cfp27-2026-05.netlify.app", estado: "en-construccion" },
-  { id: 6, nombre: "Bodega Urbana", tipo: "Bar", netlifyName: "bodega-urbana-cfp27-2026-06", url: "https://bodega-urbana-cfp27-2026-06.netlify.app", estado: "en-construccion" },
-  { id: 7, nombre: "Miga y Miel", tipo: "Café y pastelería", netlifyName: "miga-miel-cfp27-2026-07", url: "https://miga-miel-cfp27-2026-07.netlify.app", estado: "en-construccion" },
-  { id: 8, nombre: "Fuego Lento", tipo: "Restaurante", netlifyName: "fuego-lento-cfp27-2026-08", url: "https://fuego-lento-cfp27-2026-08.netlify.app", estado: "en-construccion" },
-  { id: 9, nombre: "Estación Café", tipo: "Cafetería", netlifyName: "estacion-cafe-cfp27-2026-09", url: "https://estacion-cafe-cfp27-2026-09.netlify.app", estado: "en-construccion" },
-  { id: 10, nombre: "Terraza Sur", tipo: "Bar y restaurante", netlifyName: "terraza-sur-cfp27-2026-10", url: "https://terraza-sur-cfp27-2026-10.netlify.app", estado: "en-construccion" }
+  { id: 1, nombre: "Café Nómade", tipo: "Cafetería", slug: "cafe-nomade", netlifyName: "cafe-nomade-cfp27-2026-01", url: "", estilo: "bistro", estado: "publicado" },
+  { id: 2, nombre: "Bruma Café", tipo: "Gastrobar", slug: "bruma-cafe", netlifyName: "bruma-cafe-cfp27-2026-02", url: "", estilo: "urbano", estado: "publicado" },
+  { id: 3, nombre: "Patio Central", tipo: "Bar & Cervecería", slug: "patio-central", netlifyName: "patio-central-cfp27-2026-03", url: "", estilo: "retro", estado: "publicado" },
+  { id: 4, nombre: "La Esquina Verde", tipo: "Restaurante", slug: "la-esquina-verde", netlifyName: "esquina-verde-cfp27-2026-04", url: "", estilo: "urbano", estado: "en-construccion" },
+  { id: 5, nombre: "Tostado Club", tipo: "Cafetería", slug: "tostado-club", netlifyName: "tostado-club-cfp27-2026-05", url: "", estilo: "bistro", estado: "en-construccion" },
+  { id: 6, nombre: "Bodega Urbana", tipo: "Bar", slug: "bodega-urbana", netlifyName: "bodega-urbana-cfp27-2026-06", url: "", estilo: "retro", estado: "en-construccion" },
+  { id: 7, nombre: "Miga y Miel", tipo: "Café y pastelería", slug: "miga-y-miel", netlifyName: "miga-miel-cfp27-2026-07", url: "", estilo: "bistro", estado: "en-construccion" },
+  { id: 8, nombre: "Fuego Lento", tipo: "Restaurante", slug: "fuego-lento", netlifyName: "fuego-lento-cfp27-2026-08", url: "", estilo: "urbano", estado: "en-construccion" },
+  { id: 9, nombre: "Estación Café", tipo: "Cafetería", slug: "estacion-cafe", netlifyName: "estacion-cafe-cfp27-2026-09", url: "", estilo: "bistro", estado: "en-construccion" },
+  { id: 10, nombre: "Terraza Sur", tipo: "Bar y restaurante", slug: "terraza-sur", netlifyName: "terraza-sur-cfp27-2026-10", url: "", estilo: "retro", estado: "en-construccion" }
 ];
 
 // ESTADO GLOBAL EN MEMORIA
@@ -47,6 +47,7 @@ const cardType = document.querySelector("#card-type");
 const cardNumber = document.querySelector("#card-number");
 const cardNetlifyName = document.querySelector("#card-netlify-name");
 const cardUrlLink = document.querySelector("#card-url-link");
+const cardStyleName = document.querySelector("#card-style-name");
 
 // Botones de Acción
 const btnOpenSite = document.querySelector("#btn-open-site");
@@ -73,8 +74,11 @@ const formNombre = document.querySelector("#form-nombre");
 const formTipo = document.querySelector("#form-tipo");
 const formNetlifyName = document.querySelector("#form-netlify-name");
 const formUrl = document.querySelector("#form-url");
+const themeCards = document.querySelectorAll(".theme-card");
 const btnCloseModal = document.querySelector("#btn-close-modal");
 const btnCancelModal = document.querySelector("#btn-cancel-modal");
+
+let selectedThemeStyle = "bistro";
 
 // ===========================================================================
 // FUNCIONES DE PERSISTENCIA CON LOCALSTORAGE
@@ -123,9 +127,23 @@ function renderUI() {
   renderSelectedCommerceCard();
 }
 
+function getResolvedCommerceUrl(comercio) {
+  if (comercio.url && comercio.url.trim() !== "") {
+    return comercio.url.trim();
+  }
+  if (comercio.slug) {
+    try {
+      return new URL(`../comercios/${comercio.slug}/index.html`, window.location.href).href;
+    } catch (e) {
+      return `../comercios/${comercio.slug}/index.html`;
+    }
+  }
+  return "";
+}
+
 function renderSummaryCounters() {
   const total = comerciosList.length;
-  const publicados = comerciosList.filter(c => c.url && c.url.trim() !== "").length;
+  const publicados = comerciosList.filter(c => getResolvedCommerceUrl(c) !== "").length;
   
   summaryTotal.textContent = total;
   summaryPublished.textContent = publicados;
@@ -152,6 +170,12 @@ function renderList() {
   }).join("");
 }
 
+function getThemeStyleLabel(estilo) {
+  if (estilo === "urbano") return "🍸 Urbano Moderno (theme-urbano.css)";
+  if (estilo === "retro") return "🍺 Retro Clásico (theme-retro.css)";
+  return "☕ Bistro Cálido (theme-bistro.css)";
+}
+
 function renderSelectedCommerceCard() {
   const comercio = comerciosList.find(c => c.id === selectedCommerceId);
 
@@ -168,25 +192,27 @@ function renderSelectedCommerceCard() {
   cardName.textContent = comercio.nombre;
   cardType.textContent = comercio.tipo;
   cardNetlifyName.textContent = comercio.netlifyName || "No asignado";
+  cardStyleName.textContent = getThemeStyleLabel(comercio.estilo);
 
-  const hasUrl = comercio.url && comercio.url.trim() !== "";
+  const resolvedUrl = getResolvedCommerceUrl(comercio);
+  const isPublished = Boolean(resolvedUrl);
 
-  if (hasUrl) {
-    // ESTADO PUBLICADO
+  if (isPublished) {
+    // ESTADO PUBLICADO / OPERATIVO
     cardStatusBadge.className = "status status--published";
     cardStatusText.textContent = "Publicado";
 
-    cardUrlLink.textContent = comercio.url;
-    cardUrlLink.href = comercio.url;
-    btnOpenSite.href = comercio.url;
+    cardUrlLink.textContent = resolvedUrl;
+    cardUrlLink.href = resolvedUrl;
+    btnOpenSite.href = resolvedUrl;
 
     // Habilitar botones de acción
     btnOpenSite.classList.remove("is-disabled");
     btnOpenSite.removeAttribute("aria-disabled");
     btnCopyUrl.disabled = false;
 
-    // Generar Código QR utilizando la API gratuita de código QR
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(comercio.url)}`;
+    // Generar Código QR utilizando la API gratuita con la URL resuelta dinámicamente
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(resolvedUrl)}`;
     qrImage.src = qrUrl;
     qrImage.classList.remove("is-hidden");
     qrPlaceholder.classList.add("is-hidden");
@@ -225,6 +251,14 @@ function renderSelectedCommerceCard() {
 // EVENTOS E INTERACTIVIDAD DE LA INTERFAZ
 // ===========================================================================
 
+// Selección visual de tarjetas de estéticas en el modal
+themeCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    selectedThemeStyle = card.dataset.style;
+    themeCards.forEach(c => c.classList.toggle("is-selected", c === card));
+  });
+});
+
 // Cambiar selección desde el dropdown <select>
 commerceSelect.addEventListener("change", (e) => {
   selectedCommerceId = Number(e.target.value);
@@ -243,10 +277,11 @@ commerceOlList.addEventListener("click", (e) => {
 // Copiar la URL pública al portapapeles
 btnCopyUrl.addEventListener("click", async () => {
   const comercio = comerciosList.find(c => c.id === selectedCommerceId);
-  if (comercio && comercio.url) {
+  const targetUrl = comercio ? getResolvedCommerceUrl(comercio) : "";
+  if (targetUrl) {
     const originalText = btnCopyUrl.textContent;
     try {
-      await navigator.clipboard.writeText(comercio.url);
+      await navigator.clipboard.writeText(targetUrl);
       btnCopyUrl.textContent = "¡Copiado!";
     } catch (err) {
       btnCopyUrl.textContent = "Error al copiar";
@@ -258,8 +293,9 @@ btnCopyUrl.addEventListener("click", async () => {
 // Descargar la imagen del Código QR
 btnDownloadQr.addEventListener("click", async () => {
   const comercio = comerciosList.find(c => c.id === selectedCommerceId);
-  if (comercio && comercio.url) {
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(comercio.url)}`;
+  const targetUrl = comercio ? getResolvedCommerceUrl(comercio) : "";
+  if (targetUrl) {
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(targetUrl)}`;
     try {
       const response = await fetch(qrUrl);
       const blob = await response.blob();
@@ -296,11 +332,18 @@ function openModal(isEditMode = false) {
     formTipo.value = comercio.tipo;
     formNetlifyName.value = comercio.netlifyName || "";
     formUrl.value = comercio.url || "";
+    selectedThemeStyle = comercio.estilo || "bistro";
   } else {
     modalTitle.textContent = "Nuevo Comercio";
     commerceForm.reset();
     formCommerceId.value = "";
+    selectedThemeStyle = "bistro";
   }
+
+  // Marcar la tarjeta de tema seleccionada
+  themeCards.forEach(card => {
+    card.classList.toggle("is-selected", card.dataset.style === selectedThemeStyle);
+  });
 }
 
 function closeModal() {
@@ -327,12 +370,17 @@ commerceForm.addEventListener("submit", (e) => {
   formAlertMsg.textContent = "";
   
   const idValue = formCommerceId.value;
+  const nombreClean = formNombre.value.trim();
+  const generatedSlug = nombreClean.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
   const nuevoComercio = {
-    nombre: formNombre.value.trim(),
+    nombre: nombreClean,
     tipo: formTipo.value.trim(),
+    slug: generatedSlug,
     netlifyName: formNetlifyName.value.trim(),
     url: formUrl.value.trim(),
-    estado: formUrl.value.trim() !== "" ? "publicado" : "en-construccion"
+    estilo: selectedThemeStyle,
+    estado: "publicado"
   };
 
   if (!nuevoComercio.nombre || !nuevoComercio.tipo) {

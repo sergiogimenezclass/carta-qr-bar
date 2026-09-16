@@ -658,6 +658,72 @@ select:focus {
   outline: 2px solid #C86D51;
 }
 
+/* SELECTOR DE ESTÉTICAS EN EL MODAL */
+.theme-selector-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 2px solid #DDD0C2;
+  border-radius: 12px;
+  background-color: #F5EFE6;
+  cursor: pointer;
+}
+
+.theme-card:hover {
+  border-color: #7A6F68;
+}
+
+.theme-card.is-selected {
+  border-color: #C86D51;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 12px rgba(200, 109, 81, 0.12);
+}
+
+.theme-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.theme-card-header strong {
+  font-size: 14px;
+}
+
+.theme-check {
+  display: none;
+  font-weight: 800;
+  color: #C86D51;
+}
+
+.theme-card.is-selected .theme-check {
+  display: inline;
+}
+
+.theme-swatches {
+  display: flex;
+  gap: 6px;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #DDD0C2;
+}
+
+.theme-card small {
+  color: #7A6F68;
+  font-size: 12px;
+}
+
 .modal-actions {
   display: flex;
   justify-content: flex-end;

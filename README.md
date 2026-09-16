@@ -60,23 +60,45 @@ Los alumnos escriben el HTML semántico y los estilos CSS desde cero, aplicando 
 
 ```text
 carta-cafe-bar/
-├── plantilla-comercio/          # Proyecto principal de la carta para estudiantes
+├── plantilla-comercio/          # Plantilla base didáctica para que clonen los alumnos
 │   ├── index.html              # Estructura semántica de la carta
 │   ├── css/
-│   │   └── styles.css          # Estilos visuales de la carta
-│   ├── js/
-│   │   ├── productos.js        # Listado de productos (Base de datos JS)
-│   │   └── app.js              # Lógica interactiva de la carta
-│   └── assets/
-│       └── images/             # Imágenes de productos de ejemplo
+│   │   ├── theme-bistro.css    # Estilo 1: Bistro Cálido (Arena y Terracota)
+│   │   ├── theme-urbano.css    # Estilo 2: Urbano Moderno (Pizarra y Verde Oliva)
+│   │   ├── theme-retro.css     # Estilo 3: Retro Clásico (Pergamino y Miel)
+│   │   └── styles.css          # Estilos base alternativos
+│   ├── js/ (productos.js, app.js)
+│   └── assets/ (imágenes)
 │
-└── dashboard/                  # Panel docente para gestión de comercios y QR
-    ├── index.html              # Interfaz del tablero docente
+├── comercios/                   # Carpetas físicas independientes por comercio
+│   ├── cafe-nomade/            # Comercio 1 (Estilo: Bistro Cálido -> theme-bistro.css)
+│   ├── bruma-cafe/             # Comercio 2 (Estilo: Urbano Moderno -> theme-urbano.css)
+│   ├── patio-central/          # Comercio 3 (Estilo: Retro Clásico -> theme-retro.css)
+│   └── [nombre-comercio]/      # Carpetas creadas por los alumnos para sus proyectos
+│
+└── dashboard/                  # Panel docente para gestión de comercios, QR y Estéticas
+    ├── index.html              # Interfaz del tablero docente con selector de 3 estéticas
     ├── css/
     │   └── styles.css          # Estilos del panel (Tema Craft Studio)
     └── js/
-        └── comercios.js        # Lógica CRUD y generador de QR (100% localStorage)
+        └── comercios.js        # Lógica CRUD y resolución de QR dinámicos/relativos
 ```
+
+---
+
+## 🎨 Selector de Estéticas Visuales y Carpetas por Comercio
+
+Cada comercio creado en el Dashboard cuenta con su propia **carpeta física independiente** dentro de `comercios/` e integra una de las **3 hojas de estilo CSS 100% autónomas**:
+
+1. **☕ Bistro Cálido (`theme-bistro.css`)**:  
+   Ideal para cafeterías de especialidad, pastelerías y casa de té. Paleta de tonos arena (`#F5EFE6`), terracota (`#C86D51`) y texto café oscuro (`#2C221E`).
+2. **🍸 Urbano Moderno (`theme-urbano.css`)**:  
+   Ideal para gastrobares, coctelerías y restaurantes contemporáneos. Paleta de gris pizarra suave (`#F0F2F5`), verde oliva/esmeralda (`#174C38`) y texto grafito (`#121413`).
+3. **🍺 Retro Clásico (`theme-retro.css`)**:  
+   Ideal para cervecerías artesanales, bodegones y hamburgueserías. Paleta de pergamino tostado (`#EFE6D5`), bronce/miel (`#C58F49`) y texto madera oscura (`#2A1D17`).
+
+> **📱 Portabilidad Total de los Códigos QR**:  
+> El Dashboard resuelve las direcciones de los Códigos QR usando URLs relativas al entorno donde se esté ejecutando (`new URL(...)`). Esto garantiza que el Código QR generado funcione perfectamente **tanto en local (Live Server / `localhost`)** como al subir el proyecto a **GitHub Pages** (`https://usuario.github.io/carta-cafe-bar/...`), Netlify o cualquier servidor de hosting.
 
 ---
 
