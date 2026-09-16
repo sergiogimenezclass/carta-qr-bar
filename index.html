@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portal principal de Cartas Digitales y Códigos QR. Accedé al panel de administración o explorá las maquetaciones y estéticas gastronómicas."
+    />
+    <title>MenuCraft QR | Portal de Cartas Digitales</title>
+
+    <!-- FUENTES GOOGLE: Outfit para títulos elegantes y DM Sans para el cuerpo de texto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- REGLAS GENERALES Y VARIABLES DIRECTAS --- */
+      * { box-sizing: border-box; }
+      html { font-size: 100%; scroll-behavior: smooth; }
+      
+      body {
+        margin: 0px;
+        min-width: 320px;
+        color: #F8FAFC;
+        background-color: #0F172A; /* Slate 900 */
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      h1, h2, h3, h4, p { margin-top: 0px; }
+      h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
+
+      /* BARRA SUPERIOR (TOPBAR) */
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 32px;
+        background-color: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #1E293B;
+        position: sticky;
+        top: 0px;
+        z-index: 100;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: #F8FAFC;
+      }
+
+      .brand__mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #6366F1, #8B5CF6);
+        color: #FFFFFF;
+        font-family: "Outfit", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+        box-shadow: 0px 4px 14px rgba(99, 102, 241, 0.4);
+      }
+
+      .brand strong { display: block; font-size: 18px; font-weight: 800; }
+      .brand small { display: block; color: #94A3B8; font-size: 12px; }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .nav-link {
+        color: #94A3B8;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+      .nav-link:hover { color: #F8FAFC; }
+
+      /* PAGE SHELL */
+      .container {
+        width: 100%;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 40px 24px 80px 24px;
+      }
+
+      /* HERO SECTION */
+      .hero {
+        text-align: center;
+        padding: 48px 16px 64px 16px;
+      }
+
+      .hero__eyebrow {
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        background-color: rgba(99, 102, 241, 0.1);
+        color: #818CF8;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        font-size: 44px;
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero p {
+        max-width: 680px;
+        margin-left: auto;
+        margin-right: auto;
+        color: #94A3B8;
+        font-size: 18px;
+        margin-bottom: 0px;
+      }
+
+      /* SECCIÓN ZONAS DE ACCESO (GRID DE 2 COLUMNAS) */
+      .section-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+        margin-bottom: 56px;
+      }
+
+      .access-card {
+        display: flex;
+        flex-direction: column;
+        padding: 32px;
+        border-radius: 24px;
+        background-color: #1E293B; /* Slate 800 */
+        border: 1px solid #334155;
+        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .access-card:hover {
+        transform: translateY(-6px);
+        border-color: #6366F1;
+        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-badge {
+        align-self: flex-start;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      .card-badge--indigo { color: #818CF8; background-color: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); }
+      .card-badge--emerald { color: #34D399; background-color: rgba(52, 211, 153, 0.15); border: 1px solid rgba(52, 211, 153, 0.3); }
+
+      .access-card h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #F8FAFC;
+      }
+
+      .access-card p {
+        color: #94A3B8;
+        font-size: 15px;
+        margin-bottom: 28px;
+        flex-grow: 1;
+      }
+
+      .btn-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 24px;
+        border-radius: 14px;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+      }
+
+      .btn-action--primary {
+        background-color: #6366F1;
+        color: #FFFFFF;
+      }
+      .btn-action--primary:hover { background-color: #4F46E5; }
+
+      .btn-action--secondary {
+        background-color: #334155;
+        color: #F8FAFC;
+        border: 1px solid #475569;
+      }
+      .btn-action--secondary:hover { background-color: #475569; }
+
+      /* SECCIÓN DE ESTÉTICAS VISUALES (GRID DE 3 COLUMNAS) */
+      .themes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .theme-preview-card {
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+        border-radius: 20px;
+        background-color: #1E293B;
+        border: 1px solid #334155;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .theme-preview-card:hover {
+        transform: translateY(-4px);
+        border-color: #94A3B8;
+      }
+
+      .swatches {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .swatch {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .theme-preview-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #F8FAFC;
+      }
+
+      .theme-preview-card p {
+        color: #94A3B8;
+        font-size: 14px;
+        margin-bottom: 20px;
+        flex-grow: 1;
+      }
+
+      .btn-theme-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 18px;
+        border-radius: 10px;
+        background-color: #334155;
+        color: #F8FAFC;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 700;
+        transition: background-color 0.2s ease;
+      }
+      .btn-theme-link:hover { background-color: #475569; }
+
+      /* FOOTER */
+      footer {
+        padding: 40px 24px;
+        text-align: center;
+        border-top: 1px solid #1E293B;
+        color: #64748B;
+        font-size: 14px;
+      }
+      footer a { color: #818CF8; text-decoration: none; }
+      footer a:hover { text-decoration: underline; }
+
+      @media (max-width: 600px) {
+        .topbar { padding: 16px; }
+        .hero h1 { font-size: 32px; }
+        .hero p { font-size: 16px; }
+        .container { padding-top: 24px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- BARRA SUPERIOR (TOPBAR) -->
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand__mark" aria-hidden="true">MC</span>
+        <span>
+          <strong>MenuCraft QR</strong>
+          <small>Portal Principal</small>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a class="nav-link" href="dashboard/index.html">Dashboard</a>
+        <a class="nav-link" href="plantilla-comercio/index.html">Plantilla</a>
+      </nav>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+      
+      <!-- HERO DE BIENVENIDA -->
+      <header class="hero">
+        <span class="hero__eyebrow">Sistema Web Gastronómico</span>
+        <h1>Portal de Cartas Digitales & Códigos QR</h1>
+        <p>
+          Seleccioná si deseás acceder al tablero de administración de comercios y generación de QR, o explorar las maquetaciones didácticas de cartas digitales.
+        </p>
+      </header>
+
+      <!-- ZONA DE ACCESO PRINCIPAL -->
+      <section aria-labelledby="section-access-title">
+        <h2 id="section-access-title" class="section-title">
+          <span>🚀 Acceso a las Áreas Principales</span>
+        </h2>
+
+        <div class="main-grid">
+          <!-- CARD 1: DASHBOARD -->
+          <article class="access-card">
+            <span class="card-badge card-badge--indigo">SaaS Administrador</span>
+            <h2>Tablero de Gestión (Dashboard)</h2>
+            <p>
+              Panel de administración para registrar comercios, asignar estéticas visuales (Bistro, Urbano, Retro), copiar URLs y generar Códigos QR portables para las mesas.
+            </p>
+            <a class="btn-action btn-action--primary" href="dashboard/index.html">
+              Abrir Dashboard →
+            </a>
+          </article>
+
+          <!-- CARD 2: PLANTILLA ALUMNOS -->
+          <article class="access-card">
+            <span class="card-badge card-badge--emerald">Base Estudiantes</span>
+            <h2>Plantilla Base de la Carta</h2>
+            <p>
+              Maqueta didáctica limpia de la carta digital (HTML, CSS y JavaScript). Diseñada para libre edición de estudiantes y práctica de prompts progresivos.
+            </p>
+            <a class="btn-action btn-action--secondary" href="plantilla-comercio/index.html">
+              Ver Plantilla Base →
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECCIÓN DE ESTÉTICAS VISUALES DEMO -->
+      <section aria-labelledby="section-themes-title">
+        <h2 id="section-themes-title" class="section-title">
+          <span>🎨 Galería de Estéticas Visuales de Muestra</span>
+        </h2>
+
+        <div class="themes-grid">
+          <!-- TEMA 1: BISTRO CÁLIDO -->
+          <article class="theme-preview-card">
+            <div class="swatches">
+              <span class="swatch" style="background-color: #A0432C;" title="Terracota"></span>
+              <span class="swatch" style="background-color: #FAF5EE;" title="Arena"></span>
+              <span class="swatch" style="background-color: #2C221E;" title="Marrón"></span>
+            </div>
+            <h3>☕ Bistro Cálido</h3>
+            <p>Ideal para cafeterías de especialidad, pastelerías y casas de té. Tonos arena y terracota con bordes suavizados.</p>
+            <a class="btn-theme-link" href="comercios/cafe-nomade/index.html">
+              Ver Café Nómade →
+            </a>
+          </article>
+
+          <!-- TEMA 2: URBANO MODERNO -->
+          <article class="theme-preview-card">
+            <div class="swatches">
+              <span class="swatch" style="background-color: #0F4C3A;" title="Verde Esmeralda"></span>
+              <span class="swatch" style="background-color: #E8ECEF;" title="Gris Pizarra"></span>
+              <span class="swatch" style="background-color: #121614;" title="Grafito"></span>
+            </div>
+            <h3>🍸 Urbano Moderno</h3>
+            <p>Ideal para gastrobares, coctelerías y restaurantes contemporáneos. Tonalidades verde esmeralda y gris nítido.</p>
+            <a class="btn-theme-link" href="comercios/bruma-cafe/index.html">
+              Ver Bruma Café →
+            </a>
+          </article>
+
+          <!-- TEMA 3: RETRO CLÁSICO -->
+          <article class="theme-preview-card">
+            <div class="swatches">
+              <span class="swatch" style="background-color: #3B2317;" title="Madera"></span>
+              <span class="swatch" style="background-color: #EADCC6;" title="Pergamino"></span>
+              <span class="swatch" style="background-color: #C4832D;" title="Ámbar"></span>
+            </div>
+            <h3>🍺 Retro Clásico</h3>
+            <p>Ideal para cervecerías artesanales, bodegones y hamburgueserías. Tonos pergamino tostado y acentos bronce.</p>
+            <a class="btn-theme-link" href="comercios/patio-central/index.html">
+              Ver Patio Central →
+            </a>
+          </article>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+      <p>
+        <strong>MenuCraft QR</strong> · Plataforma de Cartas Digitales e Identidades Gastronómicas.
+      </p>
+    </footer>
+
+  </body>
+</html>
