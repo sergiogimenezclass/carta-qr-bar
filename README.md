@@ -177,10 +177,7 @@ Copia y pega cada prompt progresivamente en la IA para ir construyendo la intera
 * **Objetivo**: Leer el arreglo `productos` de `productos.js` y generar las tarjetas HTML dinámicamente.
 * **Elementos HTML**: `#product-list`.
 * **Conceptos JS**: `querySelector`, `innerHTML`, `map()`, Template Literals.
-
-```text
-Crea una función renderProducts(lista) en app.js que tome la lista de productos de productos.js y genere la estructura HTML de cada tarjeta dentro del contenedor #product-list. Incluye imagen, título, descripción, precio formateado y botón de agregar.
-```
+* **Prompt**: *"Crea una función `renderProducts(lista)` en `app.js` que tome la lista de productos de `productos.js` y genere la estructura HTML de cada tarjeta dentro del contenedor `#product-list`. Incluye imagen, título, descripción, precio formateado y botón de agregar."*
 
 ---
 
@@ -188,10 +185,7 @@ Crea una función renderProducts(lista) en app.js que tome la lista de productos
 * **Objetivo**: Al hacer clic en los botones de categoría, mostrar solo los productos correspondientes.
 * **Elementos HTML**: `.category-button`.
 * **Conceptos JS**: `querySelectorAll`, `addEventListener('click')`, `filter()`.
-
-```text
-Agrega listeners de eventos click a los botones .category-button para que al presionar uno, se filtre la lista de productos por su propiedad categoria y se vuelva a ejecutar renderProducts(). Destaca el botón activo agregando la clase CSS is-active.
-```
+* **Prompt**: *"Agrega listeners de eventos `click` a los botones `.category-button` para que al presionar uno, se filtre la lista de productos por su propiedad `categoria` y se vuelva a ejecutar `renderProducts()`. Destaca el botón activo agregando la clase CSS `is-active`."*
 
 ---
 
@@ -199,10 +193,7 @@ Agrega listeners de eventos click a los botones .category-button para que al pre
 * **Objetivo**: Filtrar la lista de productos en tiempo real mientras el usuario escribe en el buscador.
 * **Elementos HTML**: `#search`.
 * **Conceptos JS**: `addEventListener('input')`, `toLowerCase()`, `includes()`.
-
-```text
-Agrega un listener al campo de texto #search para que al escribir, filtre los productos cuyo nombre contenga la palabra ingresada (ignorando mayúsculas y minúsculas) y refresque la vista.
-```
+* **Prompt**: *"Agrega un listener al campo de texto `#search` para que al escribir, filtre los productos cuyo nombre contenga la palabra ingresada (ignorando mayúsculas y minúsculas) y refresque la vista."*
 
 ---
 
@@ -210,10 +201,7 @@ Agrega un listener al campo de texto #search para que al escribir, filtre los pr
 * **Objetivo**: Mostrar un aviso cuando una búsqueda o filtro no devuelva ningún producto.
 * **Elementos HTML**: `#product-list`.
 * **Conceptos JS**: Evaluación de `array.length === 0`.
-
-```text
-En la función renderProducts(), si el arreglo filtrado está vacío, genera en #product-list un bloque HTML con la clase .empty-state informando que no se encontraron productos para esa búsqueda.
-```
+* **Prompt**: *"En la función `renderProducts()`, si el arreglo filtrado está vacío, genera en `#product-list` un bloque HTML con la clase `.empty-state` informando que no se encontraron productos para esa búsqueda."*
 
 ---
 
@@ -221,10 +209,7 @@ En la función renderProducts(), si el arreglo filtrado está vacío, genera en 
 * **Objetivo**: Permitir al cliente hacer clic en el corazón de una tarjeta para agregarla o quitarla de sus favoritos.
 * **Elementos HTML**: `.favorite-button`, `data-product-id`.
 * **Conceptos JS**: Manejo de eventos delegados, estructura `Set()`, clase CSS `is-favorite`.
-
-```text
-Crea un conjunto favoriteProductIds = new Set(). Al hacer clic en el botón .favorite-button de una tarjeta, conmuta el ID del producto en el Set y alterna la clase CSS is-favorite para pintar el corazón de rojo.
-```
+* **Prompt**: *"Crea un conjunto `favoriteProductIds = new Set()`. Al hacer clic en el botón `.favorite-button` de una tarjeta, conmuta el ID del producto en el Set y alterna la clase CSS `is-favorite` para pintar el corazón de rojo."*
 
 ---
 
@@ -232,10 +217,7 @@ Crea un conjunto favoriteProductIds = new Set(). Al hacer clic en el botón .fav
 * **Objetivo**: Al hacer clic en "Agregar +", incorporar el producto al carrito de compras.
 * **Elementos HTML**: `button[data-action="add"]`.
 * **Conceptos JS**: Estructura de mapa `Map()`, actualización de cantidades.
-
-```text
-Crea un mapa orderItems = new Map() para almacenar productId -> cantidad. Al hacer clic en el botón de agregar de una tarjeta, incrementa la cantidad de ese producto en el mapa y llama a updateOrderSummary().
-```
+* **Prompt**: *"Crea un mapa `orderItems = new Map()` para almacenar `productId -> cantidad`. Al hacer clic en el botón de agregar de una tarjeta, incrementa la cantidad de ese producto en el mapa y llama a `updateOrderSummary()`."*
 
 ---
 
@@ -243,10 +225,7 @@ Crea un mapa orderItems = new Map() para almacenar productId -> cantidad. Al hac
 * **Objetivo**: Reflejar el número total de unidades sumadas al pedido en la barra flotante.
 * **Elementos HTML**: `#order-count`.
 * **Conceptos JS**: `textContent`, suma acumulada de valores del mapa.
-
-```text
-Crea una función updateOrderSummary() que calcule la suma total de unidades en orderItems y actualice el texto del elemento #order-count.
-```
+* **Prompt**: *"Crea una función `updateOrderSummary()` que calcule la suma total de unidades en `orderItems` y actualice el texto del elemento `#order-count`."*
 
 ---
 
@@ -254,10 +233,7 @@ Crea una función updateOrderSummary() que calcule la suma total de unidades en 
 * **Objetivo**: Multiplicar las cantidades por sus precios y mostrar el subtotal acumulado en pesos.
 * **Elementos HTML**: `#order-summary`.
 * **Conceptos JS**: `toLocaleString('es-AR')`, cálculo matemático.
-
-```text
-En updateOrderSummary(), calcula el total en pesos multiplicando la cantidad de cada producto por su precio. Muestra el resultado formateado como moneda argentina (ej. $14.100) en el elemento #order-summary.
-```
+* **Prompt**: *"En `updateOrderSummary()`, calcula el total en pesos multiplicando la cantidad de cada producto por su precio. Muestra el resultado formateado como moneda argentina (ej. $14.100) en el elemento `#order-summary`."*
 
 ---
 
@@ -265,10 +241,7 @@ En updateOrderSummary(), calcula el total en pesos multiplicando la cantidad de 
 * **Objetivo**: El botón de la barra flotante solo debe estar activo cuando haya al menos un ítem agregado.
 * **Elementos HTML**: `#view-order`.
 * **Conceptos JS**: Propiedad `disabled`.
-
-```text
-En updateOrderSummary(), habilita el botón #view-order (disabled = false) solo cuando la cantidad total de ítems sea mayor a 0. De lo contrario, mantenelo deshabilitado.
-```
+* **Prompt**: *"En `updateOrderSummary()`, habilita el botón `#view-order` (`disabled = false`) solo cuando la cantidad total de ítems sea mayor a 0. De lo contrario, mantenelo deshabilitado."*
 
 ---
 
@@ -276,10 +249,7 @@ En updateOrderSummary(), habilita el botón #view-order (disabled = false) solo 
 * **Objetivo**: Identificar los productos con `disponible: false` y bloquear su compra.
 * **Elementos HTML**: `.product-card`, `button:disabled`.
 * **Conceptos JS**: Renderizado condicional.
-
-```text
-En el renderizado de la tarjeta, si el producto tiene disponible: false, agrega la clase CSS is-sold-out a la tarjeta y deshabilita su botón de agregar.
-```
+* **Prompt**: *"En el renderizado de la tarjeta, si el producto tiene `disponible: false`, agrega la clase CSS `is-sold-out` a la tarjeta y deshabilita su botón de agregar."*
 
 ---
 
@@ -287,10 +257,7 @@ En el renderizado de la tarjeta, si el producto tiene disponible: false, agrega 
 * **Objetivo**: Abrir una ventana modal con la lista de productos al presionar "Ver pedido".
 * **Elementos HTML**: `#order-modal`, `#modal-order-items`, `#view-order`.
 * **Conceptos JS**: Quitar clase `is-hidden`, iterar mapa de pedido.
-
-```text
-Al hacer clic en #view-order, remueve la clase is-hidden del modal #order-modal y genera la lista HTML de los productos agregados dentro de #modal-order-items con sus cantidades y subtotal.
-```
+* **Prompt**: *"Al hacer clic en `#view-order`, remueve la clase `is-hidden` del modal `#order-modal` y genera la lista HTML de los productos agregados dentro de `#modal-order-items` con sus cantidades y subtotal."*
 
 ---
 
@@ -298,10 +265,7 @@ Al hacer clic en #view-order, remueve la clase is-hidden del modal #order-modal 
 * **Objetivo**: Permitir modificar cantidades `+` y `-` directamente en la ventana del pedido.
 * **Elementos HTML**: `.btn-increase`, `.btn-decrease`.
 * **Conceptos JS**: Eventos dentro del modal, actualización del mapa `orderItems`.
-
-```text
-Agrega botones + y - en cada fila del modal para modificar la cantidad del producto en el mapa orderItems sin cerrar la ventana, y refresca los totales del modal y de la barra flotante.
-```
+* **Prompt**: *"Agrega botones `+` y `-` en cada fila del modal para modificar la cantidad del producto en el mapa `orderItems` sin cerrar la ventana, y refresca los totales del modal y de la barra flotante."*
 
 ---
 
@@ -309,10 +273,7 @@ Agrega botones + y - en cada fila del modal para modificar la cantidad del produ
 * **Objetivo**: Si la cantidad de un ítem llega a 0 al restar, quitar el producto de la lista.
 * **Elementos HTML**: `#modal-order-items`.
 * **Conceptos JS**: `orderItems.delete(id)`.
-
-```text
-Cuando la cantidad de un producto llegue a 0 mediante el botón de resta, eliminalo del mapa orderItems con delete() y actualiza la vista del modal y la barra flotante.
-```
+* **Prompt**: *"Cuando la cantidad de un producto llegue a 0 mediante el botón de resta, eliminalo del mapa `orderItems` con `delete()` y actualiza la vista del modal y la barra flotante."*
 
 ---
 
@@ -320,10 +281,7 @@ Cuando la cantidad de un producto llegue a 0 mediante el botón de resta, elimin
 * **Objetivo**: Limpiar por completo todos los productos del carrito con un solo botón.
 * **Elementos HTML**: `#btn-clear-order`.
 * **Conceptos JS**: `orderItems.clear()`.
-
-```text
-Agrega un listener al botón #btn-clear-order para ejecutar orderItems.clear(), cerrar el modal agregando is-hidden y restablecer la barra flotante a cero.
-```
+* **Prompt**: *"Agrega un listener al botón `#btn-clear-order` para ejecutar `orderItems.clear()`, cerrar el modal agregando `is-hidden` y restablecer la barra flotante a cero."*
 
 ---
 
@@ -331,10 +289,7 @@ Agrega un listener al botón #btn-clear-order para ejecutar orderItems.clear(), 
 * **Objetivo**: Mantener el pedido intacto si el cliente recarga la página.
 * **Elementos HTML**: N/A.
 * **Conceptos JS**: `localStorage.setItem()`, `localStorage.getItem()`, `JSON.stringify()`, `JSON.parse()`.
-
-```text
-Guarda el contenido de orderItems en localStorage bajo la clave cartas_pedido_cliente cada vez que sufra una modificación, y recupéralo automáticamente al iniciar la página en loadFromLocalStorage().
-```
+* **Prompt**: *"Guarda el contenido de `orderItems` en `localStorage` bajo la clave `cartas_pedido_cliente` cada vez que sufra una modificación, y recupéralo automáticamente al iniciar la página en `loadFromLocalStorage()`."*
 
 ---
 
@@ -371,10 +326,7 @@ Guarda el contenido de orderItems en localStorage bajo la clave cartas_pedido_cl
 * **Objetivo**: Filtrar productos combinando categoría, preferencia alimentaria (*Vegano*, *Vegetariano*, *Sin lactosa*) y búsqueda por texto.
 * **Elementos HTML**: `.preference-chip`, `data-preference`.
 * **Conceptos JS**: Evaluación con múltiples condiciones en `filter()`.
-
-```text
-Crea una función applyFilters() que filtre el arreglo de productos evaluando simultáneamente la categoría seleccionada, la preferencia alimentaria activa (.preference-chip) y el texto ingresado en el buscador.
-```
+* **Prompt**: *"Crea una función `applyFilters()` que filtre el arreglo de productos evaluando simultáneamente la categoría seleccionada, la preferencia alimentaria activa (`.preference-chip`) y el texto ingresado en el buscador."*
 
 ---
 
@@ -382,10 +334,7 @@ Crea una función applyFilters() que filtre el arreglo de productos evaluando si
 * **Objetivo**: Seleccionar un porcentaje de propina (0%, 10%, 15%, 20%) en el modal y recalcular el total final.
 * **Elementos HTML**: `.tip-button`, `#tip-detail-text`, `#modal-order-total`.
 * **Conceptos JS**: Operaciones porcentuales.
-
-```text
-Agrega listeners a los botones .tip-button del modal para guardar la propina seleccionada (0, 10, 15 o 20%), calcular el monto adicional sobre el subtotal y actualizar el total final en #modal-order-total.
-```
+* **Prompt**: *"Agrega listeners a los botones `.tip-button` del modal para guardar la propina seleccionada (0, 10, 15 o 20%), calcular el monto adicional sobre el subtotal y actualizar el total final en `#modal-order-total`."*
 
 ---
 
@@ -393,10 +342,7 @@ Agrega listeners a los botones .tip-button del modal para guardar la propina sel
 * **Objetivo**: Mostrar un aviso flotante temporizado al solicitar mozo o cuenta.
 * **Elementos HTML**: `#btn-call-waiter`, `#btn-request-check`, `#toast-notice`.
 * **Conceptos JS**: Temporizadores con `setTimeout()`.
-
-```text
-Crea una función showToastNotice(icono, mensaje) que muestre el contenedor #toast-notice removiendo la clase is-hidden durante 3.5 segundos utilizando setTimeout() para volver a ocultarlo automáticamente.
-```
+* **Prompt**: *"Crea una función `showToastNotice(icono, mensaje)` que muestre el contenedor `#toast-notice` removiendo la clase `is-hidden` durante 3.5 segundos utilizando `setTimeout()` para volver a ocultarlo automáticamente."*
 
 ---
 
@@ -404,10 +350,7 @@ Crea una función showToastNotice(icono, mensaje) que muestre el contenedor #toa
 * **Objetivo**: Registrar cada comanda confirmada para consultar el consumo acumulado de la mesa.
 * **Elementos HTML**: `#btn-confirm-order`, `#history-modal`, `#history-list`.
 * **Conceptos JS**: Arreglos de objetos en `localStorage`, formateo de fecha con `Date()`.
-
-```text
-Al hacer clic en #btn-confirm-order, guarda un objeto con la hora actual, el total abonado y el detalle del pedido en un arreglo historyArray guardado en localStorage. Muestra este historial en el modal #history-modal.
-```
+* **Prompt**: *"Al hacer clic en `#btn-confirm-order`, guarda un objeto con la hora actual, el total abonado y el detalle del pedido en un arreglo `historyArray` guardado en `localStorage`. Muestra este historial en el modal `#history-modal`."*
 
 ---
 
@@ -415,7 +358,5 @@ Al hacer clic en #btn-confirm-order, guarda un objeto con la hora actual, el tot
 * **Objetivo**: Alternar entre tema claro y tema oscuro guardando la preferencia.
 * **Elementos HTML**: `#btn-theme-toggle`, clase `.dark-theme` en `<body>`.
 * **Conceptos JS**: `classList.toggle()`, persistencia en `localStorage`.
+* **Prompt**: *"Agrega un listener al botón `#btn-theme-toggle` para alternar la clase `dark-theme` en el `body` al hacer clic, cambiar el ícono del botón entre 🌙 y ☀️, y guardar la preferencia 'dark' o 'light' en `localStorage`."*
 
-```text
-Agrega un listener al botón #btn-theme-toggle para alternar la clase dark-theme en el body al hacer clic, cambiar el ícono del botón entre 🌙 y ☀️, y guardar la preferencia 'dark' o 'light' en localStorage.
-```
