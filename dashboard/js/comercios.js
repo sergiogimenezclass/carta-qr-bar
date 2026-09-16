@@ -19,13 +19,13 @@ const COMERCIOS_DEFAULT = [
   { id: 1, nombre: "Café Nómade", tipo: "Cafetería", slug: "cafe-nomade", netlifyName: "cafe-nomade-cfp27-2026-01", url: "", estilo: "bistro", estado: "publicado" },
   { id: 2, nombre: "Bruma Café", tipo: "Gastrobar", slug: "bruma-cafe", netlifyName: "bruma-cafe-cfp27-2026-02", url: "", estilo: "urbano", estado: "publicado" },
   { id: 3, nombre: "Patio Central", tipo: "Bar & Cervecería", slug: "patio-central", netlifyName: "patio-central-cfp27-2026-03", url: "", estilo: "retro", estado: "publicado" },
-  { id: 4, nombre: "La Esquina Verde", tipo: "Restaurante", slug: "la-esquina-verde", netlifyName: "esquina-verde-cfp27-2026-04", url: "", estilo: "urbano", estado: "en-construccion" },
-  { id: 5, nombre: "Tostado Club", tipo: "Cafetería", slug: "tostado-club", netlifyName: "tostado-club-cfp27-2026-05", url: "", estilo: "bistro", estado: "en-construccion" },
-  { id: 6, nombre: "Bodega Urbana", tipo: "Bar", slug: "bodega-urbana", netlifyName: "bodega-urbana-cfp27-2026-06", url: "", estilo: "retro", estado: "en-construccion" },
-  { id: 7, nombre: "Miga y Miel", tipo: "Café y pastelería", slug: "miga-y-miel", netlifyName: "miga-miel-cfp27-2026-07", url: "", estilo: "bistro", estado: "en-construccion" },
-  { id: 8, nombre: "Fuego Lento", tipo: "Restaurante", slug: "fuego-lento", netlifyName: "fuego-lento-cfp27-2026-08", url: "", estilo: "urbano", estado: "en-construccion" },
-  { id: 9, nombre: "Estación Café", tipo: "Cafetería", slug: "estacion-cafe", netlifyName: "estacion-cafe-cfp27-2026-09", url: "", estilo: "bistro", estado: "en-construccion" },
-  { id: 10, nombre: "Terraza Sur", tipo: "Bar y restaurante", slug: "terraza-sur", netlifyName: "terraza-sur-cfp27-2026-10", url: "", estilo: "retro", estado: "en-construccion" }
+  { id: 4, nombre: "La Esquina Verde", tipo: "Restaurante", slug: "la-esquina-verde", netlifyName: "esquina-verde-cfp27-2026-04", url: "", estilo: "urbano", estado: "publicado" },
+  { id: 5, nombre: "Tostado Club", tipo: "Cafetería", slug: "tostado-club", netlifyName: "tostado-club-cfp27-2026-05", url: "", estilo: "bistro", estado: "publicado" },
+  { id: 6, nombre: "Bodega Urbana", tipo: "Bar & Bodegón", slug: "bodega-urbana", netlifyName: "bodega-urbana-cfp27-2026-06", url: "", estilo: "retro", estado: "publicado" },
+  { id: 7, nombre: "Miga y Miel", tipo: "Café y pastelería", slug: "miga-y-miel", netlifyName: "miga-miel-cfp27-2026-07", url: "", estilo: "bistro", estado: "publicado" },
+  { id: 8, nombre: "Fuego Lento", tipo: "Restaurante & Grill", slug: "fuego-lento", netlifyName: "fuego-lento-cfp27-2026-08", url: "", estilo: "urbano", estado: "publicado" },
+  { id: 9, nombre: "Estación Café", tipo: "Cafetería", slug: "estacion-cafe", netlifyName: "estacion-cafe-cfp27-2026-09", url: "", estilo: "bistro", estado: "publicado" },
+  { id: 10, nombre: "Terraza Sur", tipo: "Bar y restaurante", slug: "terraza-sur", netlifyName: "terraza-sur-cfp27-2026-10", url: "", estilo: "retro", estado: "publicado" }
 ];
 
 // ESTADO GLOBAL EN MEMORIA
