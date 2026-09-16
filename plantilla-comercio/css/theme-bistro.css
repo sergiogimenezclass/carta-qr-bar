@@ -4,32 +4,57 @@ ESTILO 1: BISTRO CÁLIDO (theme-bistro.css)
 ===============================================================================
 Temática: Cafeterías de especialidad, pastelerías y casa de té.
 Paleta: Cabecera Terracota (#A0432C), Fondo Arena (#FAF5EE), Marrón (#2C221E).
+
+-------------------------------------------------------------------------------
+REGLAS DIDÁCTICAS Y PEDAGÓGICAS DEL PROYECTO:
+1. Sin variables CSS de color: Colores expresados en código hexadecimal directo.
+2. Layout General con CSS Grid: Disposición en grilla adaptable a pantallas.
+3. Componentes internos con Flexbox: Alineación flexible de elementos.
+4. Unidades exclusivas en PÍXELES (px) y PORCENTAJES (%): Sin rem, em, vh, vw.
 ===============================================================================
 */
 
-* { box-sizing: border-box; }
-html { font-size: 100%; }
+/* --- REGLAS DE REINICIO Y ACCESIBILIDAD --- */
 
+/* box-sizing: border-box incluye el padding y border dentro del ancho total del elemento */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+/* Configuración general de la página (Fondo arena y tipografía de cuerpo) */
 body {
   margin: 0px;
   min-width: 320px;
   min-height: 800px;
   color: #2C221E;
-  background-color: #FAF5EE;
+  background-color: #FAF5EE; /* Fondo arena cálido */
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  padding-bottom: 110px;
+  padding-bottom: 110px; /* Margen inferior para que la barra flotante no tape contenido */
 }
 
+/* Heredar la fuente de texto en controles de formulario */
 button, input, select {
   font-family: inherit;
   font-size: 16px;
 }
 
-h1, h2, h3, h4, p { margin-top: 0px; }
-h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
+/* Normalización de márgenes para títulos y párrafos */
+h1, h2, h3, h4, p {
+  margin-top: 0px;
+}
 
+/* Tipografía Outfit para todos los títulos */
+h1, h2, h3, h4 {
+  font-family: "Outfit", sans-serif;
+}
+
+/* ACCESIBILIDAD: Oculta texto visualmente manteniendo la lectura para lectores de pantalla */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -41,24 +66,31 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   border: 0px;
 }
 
-/* 1. CABECERA TERRACOTA (FLEXBOX) */
+/* ===========================================================================
+   1. CABECERA Y HERO DEL COMERCIO (FLEXBOX)
+   ===========================================================================
+   Utilizamos Flexbox para alinear la identidad del local a la izquierda 
+   y la información de la mesa / botones a la derecha.
+   =========================================================================== */
 .menu-hero {
   padding: 36px 24px;
   border-bottom: 4px solid #8B3621;
-  background-color: #A0432C;
+  background-color: #A0432C; /* Fondo terracota principal */
   color: #FFFFFF;
 }
 
+/* Contenedor flexible de la cabecera */
 .menu-hero__container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Distribuye el espacio entre ambos extremos */
   gap: 20px;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
 }
 
+/* Etiqueta distintiva del tipo de comercio */
 .brand-badge {
   display: inline-block;
   margin-bottom: 6px;
@@ -72,9 +104,19 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   letter-spacing: 0.5px;
 }
 
-.brand-identity h1 { margin-bottom: 4px; font-size: 32px; line-height: 1.1; }
-.brand-identity p { margin-bottom: 0px; color: #F5D7CE; font-size: 14px; }
+.brand-identity h1 {
+  margin-bottom: 4px;
+  font-size: 32px;
+  line-height: 1.1;
+}
 
+.brand-identity p {
+  margin-bottom: 0px;
+  color: #F5D7CE;
+  font-size: 14px;
+}
+
+/* Recuadro de información de la mesa (Flexbox vertical) */
 .table-info {
   display: flex;
   flex-direction: column;
@@ -85,11 +127,33 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   background-color: rgba(0, 0, 0, 0.12);
 }
 
-.table-header-row { display: flex; align-items: center; gap: 10px; }
-.status-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #4EAA79; }
-.table-info strong { display: block; font-family: "Outfit", sans-serif; font-size: 16px; }
-.table-info small { display: block; color: #F5D7CE; font-size: 12px; }
+.table-header-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+/* Punto verde indicador de estado del local */
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #4EAA79;
+}
+
+.table-info strong {
+  display: block;
+  font-family: "Outfit", sans-serif;
+  font-size: 16px;
+}
+
+.table-info small {
+  display: block;
+  color: #F5D7CE;
+  font-size: 12px;
+}
+
+/* Botón transparente para alternar modo noche/día */
 .icon-button {
   margin-left: auto;
   padding: 6px 10px;
@@ -101,7 +165,12 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   cursor: pointer;
 }
 
-.header-actions { display: flex; gap: 6px; }
+/* Botones de asistencia rápida (Mozo, Cuenta, Historial) en hilera flexible */
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
 .header-action-button {
   padding: 6px 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -112,8 +181,13 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   font-weight: 600;
   cursor: pointer;
 }
-.header-action-button:hover { background-color: #8B3621; border-color: #8B3621; }
 
+.header-action-button:hover {
+  background-color: #8B3621;
+  border-color: #8B3621;
+}
+
+/* Envoltorio principal del cuerpo de la página */
 .page-shell {
   width: 100%;
   max-width: 1100px;
@@ -122,7 +196,12 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   padding: 24px 16px;
 }
 
-/* 2. CONTROLES Y FILTROS */
+/* ===========================================================================
+   2. SECCIÓN DE CONTROLES Y FILTROS (CSS GRID)
+   ===========================================================================
+   Usamos CSS Grid para disponer el buscador por texto y los botones de 
+   categoría en filas verticales ordenadas.
+   =========================================================================== */
 .menu-controls {
   display: grid;
   grid-template-columns: 1fr;
@@ -130,6 +209,7 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   margin-bottom: 24px;
 }
 
+/* Input de búsqueda por texto */
 .search-box input {
   width: 100%;
   min-height: 50px;
@@ -139,9 +219,20 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   background-color: #FFFFFF;
   color: #2C221E;
 }
-.search-box input:focus { outline: none; border-color: #A0432C; }
 
-.category-filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.search-box input:focus {
+  outline: none;
+  border-color: #A0432C;
+}
+
+/* Botones de filtrado por categoría (Flexbox con scroll horizontal en móviles) */
+.category-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
 .category-button {
   flex-shrink: 0;
   min-height: 40px;
@@ -154,14 +245,29 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   font-weight: 600;
   cursor: pointer;
 }
+
 .category-button.is-active, .category-button:hover {
   color: #FFFFFF;
   background-color: #A0432C;
   border-color: #A0432C;
 }
 
-.preference-filters { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
-.filter-label { color: #8A7568; font-size: 13px; font-weight: 700; white-space: nowrap; }
+/* Chips de preferencia alimentaria (Vegano, Vegetariano, Sin lactosa) */
+.preference-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.filter-label {
+  color: #8A7568;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .preference-chip {
   flex-shrink: 0;
   padding: 6px 14px;
@@ -173,19 +279,27 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   font-weight: 600;
   cursor: pointer;
 }
+
 .preference-chip.is-active, .preference-chip:hover {
   color: #FFFFFF;
   background-color: #2C221E;
   border-color: #2C221E;
 }
 
-/* 3. GRILLA DE PRODUCTOS */
+/* ===========================================================================
+   3. GRILLA PRINCIPAL DE PRODUCTOS (CSS GRID RESPONSIVO)
+   ===========================================================================
+   `repeat(auto-fill, minmax(280px, 1fr))` crea una grilla responsiva 
+   automática: acomoda tantas tarjetas de al menos 280px como entren en 
+   la pantalla sin necesidad de utilizar media queries complejas.
+   =========================================================================== */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
 
+/* Tarjeta individual de producto (Flexbox vertical) */
 .product-card {
   display: flex;
   flex-direction: column;
@@ -196,6 +310,7 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   overflow: hidden;
 }
 
+/* Imagen del producto con posición relativa para ubicar etiquetas y corazón de favorito */
 .product-image {
   position: relative;
   width: 100%;
@@ -205,6 +320,7 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   background-color: #EFE4D6;
 }
 
+/* Etiqueta flotante de categoría sobre la foto */
 .product-tag {
   position: absolute;
   top: 12px;
@@ -217,6 +333,7 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   font-weight: 700;
 }
 
+/* Botón circular de favorito en la esquina superior derecha de la imagen */
 .favorite-button {
   position: absolute;
   top: 12px;
@@ -231,18 +348,68 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   cursor: pointer;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
 }
-.favorite-button.is-favorite { color: #D32F2F; }
 
-.product-content { display: flex; flex-direction: column; flex-grow: 1; padding: 18px; }
-.product-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
-.product-title-row h3 { margin-bottom: 0px; font-size: 18px; color: #2C221E; }
-.product-title-row strong { color: #A0432C; font-family: "Outfit", sans-serif; font-size: 18px; font-weight: 800; }
-.product-content p { flex-grow: 1; margin-bottom: 14px; color: #7A695D; font-size: 14px; }
+.favorite-button.is-favorite {
+  color: #D32F2F;
+}
 
-.product-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 12px; border-top: 1px solid #E6D8C8; }
-.product-footer span { color: #7A695D; font-size: 12px; font-weight: 600; }
-.product-card.is-sold-out { opacity: 0.6; }
+/* Contenido interno de la tarjeta */
+.product-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 18px;
+}
 
+.product-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.product-title-row h3 {
+  margin-bottom: 0px;
+  font-size: 18px;
+  color: #2C221E;
+}
+
+.product-title-row strong {
+  color: #A0432C;
+  font-family: "Outfit", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.product-content p {
+  flex-grow: 1;
+  margin-bottom: 14px;
+  color: #7A695D;
+  font-size: 14px;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #E6D8C8;
+}
+
+.product-footer span {
+  color: #7A695D;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Estilo para productos agotados */
+.product-card.is-sold-out {
+  opacity: 0.6;
+}
+
+/* Estado de lista vacía (Sin resultados) */
 .empty-state {
   grid-column: 1 / -1;
   padding: 48px 24px;
@@ -251,10 +418,24 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   background-color: #FFFFFF;
   text-align: center;
 }
-.empty-state strong { display: block; margin-bottom: 6px; font-size: 20px; }
-.empty-state p { margin-bottom: 0px; color: #7A695D; }
 
-/* 4. BARRA FLOTANTE DEL PEDIDO */
+.empty-state strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.empty-state p {
+  margin-bottom: 0px;
+  color: #7A695D;
+}
+
+/* ===========================================================================
+   4. BARRA FLOTANTE DEL PEDIDO (POSITION FIXED & FLEXBOX)
+   ===========================================================================
+   `position: fixed` ancla la barra al pie de la pantalla móvil.
+   `z-index: 900` asegura que flote por encima de las tarjetas de productos.
+   =========================================================================== */
 .sticky-order-bar {
   position: fixed;
   bottom: 16px;
@@ -275,7 +456,13 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   z-index: 900;
 }
 
-.sticky-order-bar__info { display: flex; align-items: center; gap: 12px; }
+.sticky-order-bar__info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Contador circular de ítems seleccionados */
 .badge-count {
   display: flex;
   align-items: center;
@@ -289,10 +476,19 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   font-size: 16px;
   font-weight: 800;
 }
-.sticky-order-bar__info small { display: block; color: #F5D7CE; font-size: 12px; }
-.sticky-order-bar__info strong { display: block; font-size: 15px; }
 
-/* BOTONES */
+.sticky-order-bar__info small {
+  display: block;
+  color: #F5D7CE;
+  font-size: 12px;
+}
+
+.sticky-order-bar__info strong {
+  display: block;
+  font-size: 15px;
+}
+
+/* BOTONES REUTILIZABLES DE LA APLICACIÓN */
 .button {
   display: inline-flex;
   align-items: center;
@@ -305,12 +501,31 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   text-decoration: none;
   cursor: pointer;
 }
-.button--primary { color: #FFFFFF; background-color: #A0432C; }
-.button--primary:hover { background-color: #8B3621; }
-.button--secondary { border-color: #E6D8C8; color: #2C221E; background-color: #FFFFFF; }
-.button--secondary:hover { background-color: #FAF5EE; }
-.button:disabled { cursor: not-allowed; opacity: 0.45; }
 
+.button--primary {
+  color: #FFFFFF;
+  background-color: #A0432C;
+}
+
+.button--primary:hover {
+  background-color: #8B3621;
+}
+
+.button--secondary {
+  border-color: #E6D8C8;
+  color: #2C221E;
+  background-color: #FFFFFF;
+}
+
+.button--secondary:hover {
+  background-color: #FAF5EE;
+}
+
+.button:disabled {
+  cursor: not-allowed; opacity: 0.45;
+}
+
+/* TOAST DE NOTIFICACIÓN TEMPORAL (Mozo / Pedir cuenta) */
 .toast-notice {
   position: fixed;
   top: 24px;
@@ -330,7 +545,9 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   z-index: 2000;
 }
 
-/* MODALES */
+/* ===========================================================================
+   5. VENTANAS MODALES (MODAL OVERLAY & CARD WITH FLEXBOX)
+   =========================================================================== */
 .modal-overlay {
   position: fixed;
   top: 0px;
@@ -366,6 +583,7 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
   background-color: #A0432C;
   color: #FFFFFF;
 }
+
 .modal-header h2 { margin-bottom: 2px; font-size: 20px; }
 .modal-header small { color: #F5D7CE; font-size: 13px; }
 .modal-close { border: none; color: #FFFFFF; background: none; font-size: 26px; cursor: pointer; }
@@ -420,15 +638,22 @@ h1, h2, h3, h4 { font-family: "Outfit", sans-serif; }
 .success-details { margin-bottom: 24px; padding: 10px 18px; border-radius: 12px; color: #2C221E; background-color: #EFE4D6; font-size: 14px; }
 .modal-actions--center { width: 100%; justify-content: center; border-top: none; padding: 0px; }
 
+/* Utilidad para ocultar elementos manipulables desde JavaScript */
 .is-hidden { display: none !important; }
 
-/* TEMA OSCURO */
+/* ===========================================================================
+   6. MODO NOCHE / TEMA OSCURO (body.dark-theme)
+   ===========================================================================
+   Alterna las paletas escritas directamente en hexadecimal para proveer un 
+   diseño oscuro legible durante el turno noche.
+   =========================================================================== */
 body.dark-theme { color: #FAF5EE; background-color: #1A1412; }
 body.dark-theme .menu-controls input, body.dark-theme .category-button, body.dark-theme .product-card, body.dark-theme .modal-card, body.dark-theme .empty-state, body.dark-theme .tip-button, body.dark-theme .button--secondary { color: #FAF5EE; background-color: #28201D; border-color: #3D322E; }
 body.dark-theme .preference-chip, body.dark-theme .order-item-row, body.dark-theme .order-total-block, body.dark-theme .tip-section, body.dark-theme .history-card { color: #FAF5EE; background-color: #322824; border-color: #3D322E; }
 body.dark-theme .product-content p, body.dark-theme .product-footer span, body.dark-theme .filter-label, body.dark-theme .empty-state p, body.dark-theme .modal-card--success p, body.dark-theme .history-card-header small { color: #B3A499; }
 body.dark-theme .category-button.is-active, body.dark-theme .preference-chip.is-active, body.dark-theme .tip-button.is-active { color: #FFFFFF; background-color: #A0432C; border-color: #A0432C; }
 
+/* REGLAS RESPONSIVAS PARA PANTALLAS PEQUEÑAS (MEDIA QUERIES) */
 @media (max-width: 600px) {
   .menu-hero__container { flex-direction: column; align-items: flex-start; }
   .table-info { width: 100%; }
