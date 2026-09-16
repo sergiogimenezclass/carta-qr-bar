@@ -1,31 +1,31 @@
 /*
 ===============================================================================
-LÓGICA JAVASCRIPT DEL DASHBOARD DOCENTE (100% LOCALSTORAGE)
+LÓGICA JAVASCRIPT DEL DASHBOARD MENUCRAFT QR (100% LOCALSTORAGE)
 ===============================================================================
 En este archivo administramos:
-1. La lista de comercios del curso utilizando únicamente localStorage.
-2. La actualización de la tarjeta seleccionada y sus estadísticas.
-3. La generación automática del Código QR cuando hay una URL de Netlify.
+1. La lista de comercios registrados utilizando únicamente localStorage.
+2. La actualización de la tarjeta seleccionada y sus métricas.
+3. La generación automática del Código QR dinámico / portable.
 4. El copiado de URL al portapapeles y la descarga de la imagen QR.
 5. El alta, modificación y baja de comercios mediante un modal interactivo.
 ===============================================================================
 */
 
 // CLAVE UTILIZADA EN LOCALSTORAGE PARA GUARDAR LOS COMERCIOS EN EL NAVEGADOR
-const LOCAL_STORAGE_KEY = "cartas_comercios_cfp27";
+const LOCAL_STORAGE_KEY = "cartas_comercios_app";
 
 // DATOS INICIALES DE PRUEBA (Se cargan la primera vez si localStorage está vacío)
 const COMERCIOS_DEFAULT = [
-  { id: 1, nombre: "Café Nómade", tipo: "Cafetería", slug: "cafe-nomade", netlifyName: "cafe-nomade-cfp27-2026-01", url: "", estilo: "bistro", estado: "publicado" },
-  { id: 2, nombre: "Bruma Café", tipo: "Gastrobar", slug: "bruma-cafe", netlifyName: "bruma-cafe-cfp27-2026-02", url: "", estilo: "urbano", estado: "publicado" },
-  { id: 3, nombre: "Patio Central", tipo: "Bar & Cervecería", slug: "patio-central", netlifyName: "patio-central-cfp27-2026-03", url: "", estilo: "retro", estado: "publicado" },
-  { id: 4, nombre: "La Esquina Verde", tipo: "Restaurante", slug: "la-esquina-verde", netlifyName: "esquina-verde-cfp27-2026-04", url: "", estilo: "urbano", estado: "publicado" },
-  { id: 5, nombre: "Tostado Club", tipo: "Cafetería", slug: "tostado-club", netlifyName: "tostado-club-cfp27-2026-05", url: "", estilo: "bistro", estado: "publicado" },
-  { id: 6, nombre: "Bodega Urbana", tipo: "Bar & Bodegón", slug: "bodega-urbana", netlifyName: "bodega-urbana-cfp27-2026-06", url: "", estilo: "retro", estado: "publicado" },
-  { id: 7, nombre: "Miga y Miel", tipo: "Café y pastelería", slug: "miga-y-miel", netlifyName: "miga-miel-cfp27-2026-07", url: "", estilo: "bistro", estado: "publicado" },
-  { id: 8, nombre: "Fuego Lento", tipo: "Restaurante & Grill", slug: "fuego-lento", netlifyName: "fuego-lento-cfp27-2026-08", url: "", estilo: "urbano", estado: "publicado" },
-  { id: 9, nombre: "Estación Café", tipo: "Cafetería", slug: "estacion-cafe", netlifyName: "estacion-cafe-cfp27-2026-09", url: "", estilo: "bistro", estado: "publicado" },
-  { id: 10, nombre: "Terraza Sur", tipo: "Bar y restaurante", slug: "terraza-sur", netlifyName: "terraza-sur-cfp27-2026-10", url: "", estilo: "retro", estado: "publicado" }
+  { id: 1, nombre: "Café Nómade", tipo: "Cafetería", slug: "cafe-nomade", netlifyName: "cafe-nomade-2026-01", url: "", estilo: "bistro", estado: "publicado" },
+  { id: 2, nombre: "Bruma Café", tipo: "Gastrobar", slug: "bruma-cafe", netlifyName: "bruma-cafe-2026-02", url: "", estilo: "urbano", estado: "publicado" },
+  { id: 3, nombre: "Patio Central", tipo: "Bar & Cervecería", slug: "patio-central", netlifyName: "patio-central-2026-03", url: "", estilo: "retro", estado: "publicado" },
+  { id: 4, nombre: "La Esquina Verde", tipo: "Restaurante", slug: "la-esquina-verde", netlifyName: "esquina-verde-2026-04", url: "", estilo: "urbano", estado: "publicado" },
+  { id: 5, nombre: "Tostado Club", tipo: "Cafetería", slug: "tostado-club", netlifyName: "tostado-club-2026-05", url: "", estilo: "bistro", estado: "publicado" },
+  { id: 6, nombre: "Bodega Urbana", tipo: "Bar & Bodegón", slug: "bodega-urbana", netlifyName: "bodega-urbana-2026-06", url: "", estilo: "retro", estado: "publicado" },
+  { id: 7, nombre: "Miga y Miel", tipo: "Café y pastelería", slug: "miga-y-miel", netlifyName: "miga-miel-2026-07", url: "", estilo: "bistro", estado: "publicado" },
+  { id: 8, nombre: "Fuego Lento", tipo: "Restaurante & Grill", slug: "fuego-lento", netlifyName: "fuego-lento-2026-08", url: "", estilo: "urbano", estado: "publicado" },
+  { id: 9, nombre: "Estación Café", tipo: "Cafetería", slug: "estacion-cafe", netlifyName: "estacion-cafe-2026-09", url: "", estilo: "bistro", estado: "publicado" },
+  { id: 10, nombre: "Terraza Sur", tipo: "Bar y restaurante", slug: "terraza-sur", netlifyName: "terraza-sur-2026-10", url: "", estilo: "retro", estado: "publicado" }
 ];
 
 // ESTADO GLOBAL EN MEMORIA
